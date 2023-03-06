@@ -21,7 +21,7 @@ if (!isset($_SESSION['user']['username'])){
 ?>
     <div class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
-            <a class="btn btn-success" href="add-product.php">Product qo'shish</a>
+            <a class="btn btn-success" href="add-product.php">Produkt qo'shish</a>
             <h1>Productlar ro'yxati</h1>
 <table class="table">
       <thead>
