@@ -8,3 +8,10 @@ function getCategoryName($id){
     $result = $result->fetch_assoc();
     return isset($result['name']) ? $result['name'] : '';
 }
+
+function getSlideName(){
+    global $conn;
+    $slide = "SELECT * FROM slide ORDER BY level DESC ";
+    $slides = $conn->query($slide);
+    return $slides->fetch_all(MYSQLI_ASSOC);
+}
