@@ -34,7 +34,7 @@ if (isset($_POST['name']) && isset($_POST['price'])
 
 
         $insert_sql = "INSERT INTO slide (name,price,image, level, description) 
-                               VALUES ('$name', $price,'$image', $level,'$description')";
+                               VALUES ('$name', $price,'$image_name', $level,'$description')";
 
     }
 

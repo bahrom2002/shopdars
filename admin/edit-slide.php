@@ -34,56 +34,48 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price'])
     $level = $_POST['level'];
     $description = $_POST['description'];
 
-    if (isset($_FILES['image'])){
+
         $folder = "../uploads";
         $target_file = $folder . basename($_FILES['image']["name"]);
 
+
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
             $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
-        }
+
         $update_sql = "UPDATE product 
-                               SET name = '$name', price = $price, category_id = $category_id, instock = '$instock', description = '$description', image = '$image_name'
+                               SET name = '$name', price = $price,level = '$level', description = '$description', image = '$image_name'
                                WHERE id = $id";
     }
     if($conn->query($update_sql)){
-        header( "Location: select-slide.php");
-    }
+        header( "Location: slide.php");
 }
-
+}
 ?>
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <h1>Mahsulotlarni yangilash</h1>
-        <form action="edit-product.php" method="post" enctype="multipart/form-data">
+        <form action="edit-slide.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <input type="hidden" name="id" value="<?= $get_slide['id'] ?>">
-                <label for="name" class="form-label"> Mahsulot nomi</label>
-                <input name="name" value="<?= isset($get_slide['name']) ? $get_slide['name'] : ''  ?>" type="text" class="form-control" id="name" placeholder="Mahsulot nomi">
+                <input type="hidden" name="id" value="<?= isset() ?>">
+                <label for="name" class="form-label"> Slide nomi</label>
+                <input name="name" value="<?= isset($get_slide['name']) ? $get_slide['name'] : ''  ?>"
+                       type="text" class="form-control" id="name" placeholder="Slide nomi">
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label"> Mahsulot nomi</label>
-                <input name="image" value="<?= isset($get_slide['image']) ? $get_slide['image'] : ''?>" type="file" class="form-control" id="image" placeholder="Mahsulot rasmi">
+                <label for="image" class="form-label"> Rasm</label>
+                <input name="image" value="<?= isset($get_slide['image']) ? $get_slide['image'] : ''?>"
+                       type="file" class="form-control" id="image" placeholder="Rasm">
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label"> Mahsulot narxi</label>
-                <input name="price" value="<?= isset($get_slide['price']) ? $get_slide['price'] : ''?>" type="text" class="form-control" id="price" placeholder="Mahsulot narxi">
+                <input name="price" value="<?= isset($get_slide['price']) ? $get_slide['price'] : ''?>"
+                           type="text" class="form-control" id="price" placeholder="Mahsulot narxi">
             </div>
             <div class="mb-3">
-                <label for="category_id" class="form-label"> Kategoriyalar</label>
-                <select class="form-select" name="category_id">
-                    <?php  foreach ($cat_list as $cat):?>
-                        <?php if ($get_slide['category_id'] == $cat['id']): ?>
-                            <option selected value="<?= $cat['id']?>"><?= $cat['name']?></option>
-                        <?php else: ?>
-                            <option  value="<?= $cat['id']?>"><?= $cat['name']?></option>
-                        <?php endif; ?>
-                    <?php endforeach;?>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="instock" class="form-label"> Mahsulot miqdori</label>
-                <input name="instock" value="<?= isset($get_slide['instock']) ? $get_slide['instock'] : '' ?>" type="text" class="form-control" id="instock" placeholder="Mahsulot miqdori">
+                <label for="instock" class="form-label"> Tartibi</label>
+                <input name="instock" value="<?= isset($get_slide['level']) ? $get_slide['level'] : '' ?>"
+                       type="text" class="form-control" id="level" placeholder="Mahsulot miqdori">
             </div>
 
             <div class="mb-3">
