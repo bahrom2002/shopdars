@@ -43,13 +43,13 @@ require ('../functions.php')
                         <th><?= $slide['name']; ?></th>
                         <th><?= $slide['price']; ?></th>
                         <th><?= $slide['description'];?></th>
-                        <th><?= $slide['image'];?></th>
+                        <th><img src="../<?= $slide['image'];?>" alt="" width="150"></th>
                         <th><?= $slide['level'];?></th>
 
 
                         <td>
-                            <a href="edit-slide.php?id=<?= $slide['id'];?>" class =  "btn btn-warning" >O'zgartirish</a>
-                            <a href="delete-slide.php?id=<?= $slide['id'];?>" class =  "btn btn-danger" >O'chirish</a>
+                            <a href="edit-slide.php?id=<?= $slide['id'];?>" class="btn btn-warning">O'zgartirish</a>
+                            <a href="delete-slide.php?id=<?= $slide['id'];?>" class="btn btn-danger" >O'chirish</a>
                         </td>
                     </tr>
                 <?php endforeach;?>

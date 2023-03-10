@@ -11,6 +11,7 @@
                 <li class="nav-item"><a class="nav-link" href="select-category.php">Kategoriyalar</a></li>
                 <li class="nav-item"><a class="nav-link" href="select-user.php">Foydalanuvchilar</a></li>
                 <li class="nav-item"><a class="nav-link" href="slide.php">Slidelar</a></li>
+                <li class="nav-item"><a class="nav-link" href="partners.php">Hamkorlar</a></li>
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">

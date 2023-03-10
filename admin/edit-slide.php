@@ -30,34 +30,34 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price'])
     $id = $_POST['id'];
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $image = $_FILES['image'];
     $level = $_POST['level'];
     $description = $_POST['description'];
 
 
-        $folder = "../uploads";
+        $folder = "../slides";
         $target_file = $folder . basename($_FILES['image']["name"]);
 
 
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
-            $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $image_name = 'slides/' . basename($_FILES["image"]["name"]);
+        }
 
-        $update_sql = "UPDATE product 
+        $update_sql = "UPDATE slide 
                                SET name = '$name', price = $price,level = '$level', description = '$description', image = '$image_name'
                                WHERE id = $id";
-    }
+
     if($conn->query($update_sql)){
         header( "Location: slide.php");
-}
+       }
 }
 ?>
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <h1>Mahsulotlarni yangilash</h1>
+        <h1>Slidelarni yangilash</h1>
         <form action="edit-slide.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <input type="hidden" name="id" value="<?= isset() ?>">
+                <input type="hidden" name="id" value="<?= isset($get_slide['id']) ? $get_slide['id'] : ''  ?>">
                 <label for="name" class="form-label"> Slide nomi</label>
                 <input name="name" value="<?= isset($get_slide['name']) ? $get_slide['name'] : ''  ?>"
                        type="text" class="form-control" id="name" placeholder="Slide nomi">
@@ -73,8 +73,8 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price'])
                            type="text" class="form-control" id="price" placeholder="Mahsulot narxi">
             </div>
             <div class="mb-3">
-                <label for="instock" class="form-label"> Tartibi</label>
-                <input name="instock" value="<?= isset($get_slide['level']) ? $get_slide['level'] : '' ?>"
+                <label for="level" class="form-label"> Tartibi</label>
+                <input name="level" value="<?= isset($get_slide['level']) ? $get_slide['level'] : '' ?>"
                        type="text" class="form-control" id="level" placeholder="Mahsulot miqdori">
             </div>
 

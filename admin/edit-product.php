@@ -54,8 +54,8 @@ if (!isset($_SESSION['user']['username'])){
 
                     if($conn->query($update_sql)){
                         header( "Location: select-product.php");
-            }
-        }
+                  }
+    }
 
                 $cat_list = "SELECT * FROM category";
                 $cat_list = $conn->query($cat_list);
