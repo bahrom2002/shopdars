@@ -17,6 +17,8 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
 
     <!-- End Hero -->
        <?php require "sections/slide.php"?>
+
+        <button class="btn-btn-primary mybutton">meni bos</button>
     <!-- Icon Blocks -->
     <div class="border-bottom">
         <div class="container content-space-2">
@@ -289,7 +291,7 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
                         </a>
                         <!-- End Rating -->
 
-                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill">Add to cart</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill to-cart" product-id = "<?= isset($tproduct['id']) ? $tproduct['id'] : ''?>">Add to cart</button>
                     </div>
                 </div>
                 <!-- End Card -->

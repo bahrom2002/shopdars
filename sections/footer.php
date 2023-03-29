@@ -555,6 +555,8 @@
 
 <!-- JS Front -->
 <script src="assets/js/theme.min.js"></script>
+<script src="assets/js/jquery.js" ></script>
+<script src="assets/js/main.js" ></script>
 
 <!-- JS Plugins Init. -->
 <script>
