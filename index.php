@@ -343,35 +343,17 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
     <!-- Clients -->
     <div class="container content-space-2">
         <div class="row">
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/hollister-dark.svg" alt="Logo">
-            </div>
+
+            <?php
+            $partners = getPartners();
+                 foreach ($partners as $partner):?>
+                <div class="col text-center py-3">
+
+                    <img class="avatar avatar-lg avatar-4x3" src="<?= isset($partner['image']) ? $partner['image'] : '' ?>" alt="Logo">
+                </div>
+            <?php endforeach;?>
             <!-- End Col -->
 
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/levis-dark.svg" alt="Logo">
-            </div>
-            <!-- End Col -->
-
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/new-balance-dark.svg" alt="Logo">
-            </div>
-            <!-- End Col -->
-
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/puma-dark.svg" alt="Logo">
-            </div>
-            <!-- End Col -->
-
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/nike-dark.svg" alt="Logo">
-            </div>
-            <!-- End Col -->
-
-            <div class="col text-center py-3">
-                <img class="avatar avatar-lg avatar-4x3" src="assets/svg/brands/tnf-dark.svg" alt="Logo">
-            </div>
-            <!-- End Col -->
         </div>
         <!-- End Row -->
     </div>

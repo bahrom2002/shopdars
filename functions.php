@@ -15,3 +15,10 @@ function getSlideName(){
     $slides = $conn->query($slide);
     return $slides->fetch_all(MYSQLI_ASSOC);
 }
+
+function getPartners(){
+    global $conn;
+    $partners = "SELECT * FROM partners ORDER BY level DESC ";
+    $partners = $conn->query($partners);
+    return $partners->fetch_all(MYSQLI_ASSOC);
+}
