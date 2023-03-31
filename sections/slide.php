@@ -1,6 +1,6 @@
 <?php
 
-$slides = getSlideName();
+$slides = getSlide();
 ?>
 
 

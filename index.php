@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "sections/head.php";
 require "sections/header.php";
 
@@ -18,7 +19,7 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
     <!-- End Hero -->
        <?php require "sections/slide.php"?>
 
-        <button class="btn-btn-primary mybutton">meni bos</button>
+
     <!-- Icon Blocks -->
     <div class="border-bottom">
         <div class="container content-space-2">

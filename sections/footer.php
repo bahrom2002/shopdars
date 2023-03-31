@@ -4,7 +4,7 @@
             <div class="col-lg-3 mb-5">
                 <div class="d-flex align-items-start flex-column h-100">
                     <!-- Logo -->
-                    <a class="w-100 mb-3 mb-lg-auto" href="demo-shop/index.html" aria-label="Front">
+                    <a class="w-100 mb-3 mb-lg-auto" href="index.php" aria-label="Front">
                         <img class="brand" src="assets/svg/logos/logo.svg" alt="Logo">
                     </a>
                     <!-- End Logo -->

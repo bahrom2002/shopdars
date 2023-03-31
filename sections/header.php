@@ -7,7 +7,7 @@
     <div class="container">
         <nav class="js-mega-menu navbar-nav-wrap">
             <!-- Default Logo -->
-            <a class="navbar-brand" href="demo-shop/index.html" aria-label="Front">
+            <a class="navbar-brand" href="index.php" aria-label="Front">
                 <img class="navbar-brand-logo" src="assets/svg/logos/logo.svg" alt="Logo">
             </a>
             <!-- End Default Logo -->
@@ -34,8 +34,8 @@
                     <li class="hs-has-sub-menu nav-item">
                         <a id="listingsDropdown" class="hs-mega-menu-invoker nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listings</a>
                         <div class="hs-sub-menu dropdown-menu" aria-labelledby="listingsDropdown" style="min-width: 14rem;">
-                            <a class="dropdown-item " href="demo-shop/products-list.html">Listing</a>
-                            <a class="dropdown-item " href="demo-shop/products-grid.html">Listing (Grid)</a>
+                            <a class="dropdown-item " href="product.php">Listing</a>
+                            <a class="dropdown-item " href="product.php">Listing (Grid)</a>
                         </div>
                     </li>
                     <!-- End Dropdown -->
@@ -108,6 +108,9 @@
                         <button type="button" class="btn btn-ghost-secondary btn-sm btn-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarEmptyShoppingCart" aria-controls="offcanvasNavbarEmptyShoppingCart">
                             <i class="bi-basket"></i>
                         </button>
+                        <a type="button" class="btn btn-primary" href="cart.php">
+                            Cart <span class="badge badge-light" id="count-cart"><?= isset($_SESSION['cart']['count']) ? $_SESSION['cart']['count'] : ''?></span>
+                        </a>
                         <!-- End Shopping Cart -->
 
                         <button class="btn btn-primary btn-transition" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Login</button>
