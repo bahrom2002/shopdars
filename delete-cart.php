@@ -7,13 +7,11 @@ if (isset($_GET['id'])) {
 
    $products = $_SESSION['cart']['products'];
 
-   $i = 0;
-   while ($i <= count($products)){
-       if ($id == $products[$i]){
-           unset( $_SESSION['cart']['products'][$i]);
-           $_SESSION['cart']['count']--;
-       }
-       $i++;
-   }
+  foreach ($products as $key => $value ){
+      if ($id == $value){
+          unset($_SESSION['cart']['products'][$key]);
+          $_SESSION['cart']['count']--;
+      }
+  }
     header('location: cart.php');
 }

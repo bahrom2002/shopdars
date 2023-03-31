@@ -43,6 +43,7 @@ if (isset($_SESSION['cart']['products'])){
 
                 <!-- Form -->
                 <form>
+                    <?php if (isset($products) && count($products) > 0): ?>
                     <!-- List Group -->
                     <ul class="list-group list-group-flush list-group-no-gutters mb-5">
                        <?php foreach ($products as $product): ?>
@@ -130,7 +131,9 @@ if (isset($_SESSION['cart']['products'])){
                         <?php endforeach; ?>
                     </ul>
                     <!-- End List Group -->
-
+                    <?php else: ?>
+                    Hech narsa buyurtma qilmadingiz!
+                    <?php endif; ?>
                     <div class="d-sm-flex justify-content-end">
                         <a class="link" href="../demo-shop/index.html">
                             <i class="bi-chevron-left small ms-1"></i> Continue shopping

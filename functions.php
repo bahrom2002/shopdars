@@ -32,8 +32,13 @@ function getPartners(){
 
 function getProducts($ids){
     global $conn;
-    $ids = implode(',', $ids);
-    $product = "SELECT * FROM product WHERE id IN($ids)  ";
-    $products = $conn->query($product);
-    return $products->fetch_all(MYSQLI_ASSOC);
+    if (count($ids) > 0){
+        $ids = implode(',', $ids);
+        $product = "SELECT * FROM product WHERE id IN($ids)  ";
+        $products = $conn->query($product);
+        return $products->fetch_all(MYSQLI_ASSOC);
+    }else{
+        return [];
+    }
+
 }
