@@ -75,7 +75,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price'])
             <div class="mb-3">
                 <label for="level" class="form-label"> Tartibi</label>
                 <input name="level" value="<?= isset($get_slide['level']) ? $get_slide['level'] : '' ?>"
-                       type="text" class="form-control" id="level" placeholder="Mahsulot miqdori">
+                       type="text" class="form-control" id="level" placeholder="Mahsulot tartibi">
             </div>
 
             <div class="mb-3">

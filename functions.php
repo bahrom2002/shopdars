@@ -1,9 +1,17 @@
 <?php
 include ('dbmysql.php');
 
-function getProduct(){
+
+function Product(){
     global $conn;
     $product = "SELECT * FROM product ";
+    $products = $conn->query($product);
+    return $products->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProduct(){
+    global $conn;
+    $product = "SELECT * FROM product LIMIT 8 ";
     $products = $conn->query($product);
     return $products->fetch_all(MYSQLI_ASSOC);
 }
@@ -41,4 +49,11 @@ function getProducts($ids){
         return [];
     }
 
+}
+
+function getBuyStep(){
+    global $conn;
+    $buy_step = "SELECT * FROM buy_step ORDER BY level DESC ";
+    $buy_steps = $conn->query($buy_step);
+    return $buy_steps->fetch_all(MYSQLI_ASSOC);
 }

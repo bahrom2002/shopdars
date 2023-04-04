@@ -7,9 +7,6 @@ include ('dbmysql.php');
 
 include ('functions.php');
 
-$top_products = "SELECT * FROM product LIMIT 8";
-$top_products = $conn->query($top_products);
-$top_products = $top_products->fetch_all(MYSQLI_ASSOC);
 
 ?>
 
@@ -21,55 +18,33 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
 
 
     <!-- Icon Blocks -->
+
     <div class="border-bottom">
         <div class="container content-space-2">
             <div class="row">
+                <?php $buy_steps = getBuyStep();
+                foreach ($buy_steps as $buy_step):
+                ?>
                 <div class="col-md-4 mb-7 mb-md-0">
                     <!-- Icon Block -->
                     <div class="d-flex">
                         <div class="flex-shrink-0">
-                            <img class="avatar avatar-4x3" src="assets/svg/illustrations/oc-protected-card.svg" alt="Image Description">
+                            <img class="avatar avatar-4x3" src="<?= isset($buy_step['image']) ? $buy_step['image'] : '' ?>" alt="Image Description">
                         </div>
                         <div class="flex-grow-1 ms-4">
-                            <h4 class="mb-1">Secure checkout</h4>
-                            <p class="small mb-0">Guaranteed safe checkout</p>
+                            <h4 class="mb-1"><?= isset($buy_step['name']) ? $buy_step['name'] : '' ?></h4>
+                            <p class="small mb-0"><?= isset($buy_step['description']) ? $buy_step['description'] : '' ?></p>
                         </div>
                     </div>
                     <!-- End Icon Block -->
                 </div>
                 <!-- End Col -->
+                <?php endforeach; ?>
 
-                <div class="col-md-4 mb-7 mb-md-0">
-                    <!-- Icon Block -->
-                    <div class="d-flex">
-                        <div class="flex-shrink-0">
-                            <img class="avatar avatar-4x3" src="assets/svg/illustrations/oc-return.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 ms-4">
-                            <h4 class="mb-1">30 Days return</h4>
-                            <p class="small mb-0">We offer you a full refund within 30 days of purchase.</p>
-                        </div>
-                    </div>
-                    <!-- End Icon Block -->
-                </div>
-                <!-- End Col -->
-
-                <div class="col-md-4">
-                    <!-- Icon Block -->
-                    <div class="d-flex">
-                        <div class="flex-shrink-0">
-                            <img class="avatar avatar-4x3" src="assets/svg/illustrations/oc-truck.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 ms-4">
-                            <h4 class="mb-1">Free shipping</h4>
-                            <p class="small mb-0">Automatically receive free standard shipping on every order.</p>
-                        </div>
-                    </div>
-                    <!-- End Icon Block -->
-                </div>
                 <!-- End Col -->
             </div>
             <!-- End Row -->
+
         </div>
     </div>
     <!-- End Icon Blocks -->
@@ -247,12 +222,14 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
     <div class="container content-space-2 content-space-lg-3">
         <!-- Title -->
         <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
-            <h2>What's trending</h2>
+            <h2>Eng ko'p sotilgan mahsulotlar</h2>
         </div>
         <!-- End Title -->
 
         <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mb-3">
-            <?php foreach ($top_products as $tproduct):  ?>
+            <?php
+            $top_products = getProduct();
+            foreach ($top_products as $tproduct):  ?>
             <div class="col mb-4">
                 <!-- Card -->
                 <div class="card card-bordered shadow-none text-center h-100">
@@ -305,7 +282,7 @@ $top_products = $top_products->fetch_all(MYSQLI_ASSOC);
         <!-- End Row -->
 
         <div class="text-center">
-            <a class="btn btn-outline-primary btn-transition rounded-pill" href="#">View all products</a>
+            <a class="btn btn-outline-primary btn-transition rounded-pill" href="product.php">Hamma mahsulotlarni ko'rish</a>
         </div>
     </div>
     <!-- End Card Grid -->

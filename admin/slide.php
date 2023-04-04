@@ -17,7 +17,7 @@ if (!isset($_SESSION['user']['username'])){
 require ('../functions.php')
 ?>
 <?php
-      $slides = getSlideName();
+      $slides = getSlide();
 ?>
     <div class="py-5">
         <div class="container px-4 px-lg-5 mt-5">

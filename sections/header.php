@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="demo-shop/index.html">Home</a>
+                        <a class="nav-link active" href="index.php">Home</a>
                     </li>
 
                     <!-- Dropdown -->

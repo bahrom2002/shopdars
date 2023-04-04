@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="buy_step.php">Buy_Step</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="select-product.php">Productlar</a></li>
                 <li class="nav-item"><a class="nav-link" href="select-category.php">Kategoriyalar</a></li>

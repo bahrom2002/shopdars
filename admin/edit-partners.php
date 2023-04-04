@@ -22,7 +22,7 @@ if (isset($_GET['id'])){
 
 <?php
 if (isset($_POST['id']) && isset($_FILES['image']) && isset($_POST['level'])){
-    var_dump($_FILES['image']);
+
     $id = $_POST['id'];
     $level = $_POST['level'];
 
@@ -58,7 +58,7 @@ if (isset($_POST['id']) && isset($_FILES['image']) && isset($_POST['level'])){
             <div class="mb-3">
                 <input type="hidden" name="id" value="<?= isset($get_pro['id']) ? $get_pro['id'] : '' ?>">
                 <label for="image" class="form-label">slide rasmi</label>
-                <input name="image" type="file" value="<?= isset($get_pro['image'] ) ? $get_pro['image'] : NULL  ?>" class="form-control" id="image" placeholder="Mahsulot rasmi"><br>
+                <input name="image" type="file" value="<?= isset($get_pro['image'] ) ? $get_pro['image'] : NULL  ?>" class="form-control" id="image" placeholder="Hamkorlar rasmi"><br>
             </div>
             <div class="mb-3">
                 <label for="level" class="form-label">level </label>

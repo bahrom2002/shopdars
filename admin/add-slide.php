@@ -9,9 +9,6 @@ if (!isset($_SESSION['user']['username'])){
 <!-- Navigation-->
 <?php require('sections/menu.php'); ?>
 
-<!-- Header-->
-<?php // require ('sections/header.php'); ?>
-
 <?php include ('../dbmysql.php'); ?>
 
 <?php
@@ -63,8 +60,8 @@ if (isset($_POST['name']) && isset($_POST['price'])
                 <input name="price" type="text" class="form-control" id="price" placeholder="Slide narxi">
             </div>
             <div class="mb-3">
-                <label for="level" class="form-label"> Slide miqdori</label>
-                <input name="level" type="text" class="form-control" id="level" placeholder="Slide tartibi">
+                <label for="level" class="form-label"> Slide tartibi</label>
+                <input name="level" type="number" class="form-control" id="level" placeholder="Slide tartibi">
             </div>
 
             <div class="mb-3">

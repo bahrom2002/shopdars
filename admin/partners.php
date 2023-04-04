@@ -8,13 +8,10 @@ if (!isset($_SESSION['user']['username'])){
 
 require ('sections/head.php'); ?>
 
-<!-- Navigation-->
 <?php require('sections/menu.php'); ?>
 
-<!-- Header-->
-<?php //require ('sections/header.php'); ?>
-
 <?php require('../dbmysql.php'); ?>
+
 <?php
 $partner = "SELECT * FROM partners ORDER BY level DESC ";
 $partners = $conn->query($partner);
@@ -50,6 +47,5 @@ $partners = $partners->fetch_all(MYSQLI_ASSOC);
             </tbody>
         </table>
     </div>
-</div>
 </div>
 <?php require ('sections/footer.php');?>

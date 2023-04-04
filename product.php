@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "sections/head.php";
 require "sections/header.php";
 
@@ -6,7 +7,7 @@ require 'dbmysql.php';
 
 require 'functions.php';
 
-$top_products = getProduct();
+$top_products = Product();
 ?>
 
 
@@ -467,7 +468,7 @@ $top_products = getProduct();
 
                                     <div class="card-footer">
                                         <div class="d-flex gap-2">
-                                            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">Add to cart</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill to-cart" product-id = "<?= isset($product['id']) ? $product['id'] : ''?>">Add to cart</button>
                                             <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
                                                 <i class="bi-heart me-1"></i> Wishlist
                                             </button>

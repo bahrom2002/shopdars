@@ -7,10 +7,6 @@ include ('dbmysql.php');
 
 include ('functions.php');
 
-$top_products = "SELECT * FROM product LIMIT 8";
-$top_products = $conn->query($top_products);
-$top_products = $top_products->fetch_all(MYSQLI_ASSOC);
-
 
 if (isset($_SESSION['cart']['products'])){
     $products = $_SESSION['cart']['products'];
@@ -135,7 +131,7 @@ if (isset($_SESSION['cart']['products'])){
                     Hech narsa buyurtma qilmadingiz!
                     <?php endif; ?>
                     <div class="d-sm-flex justify-content-end">
-                        <a class="link" href="../demo-shop/index.html">
+                        <a class="link" href="product.php">
                             <i class="bi-chevron-left small ms-1"></i> Continue shopping
                         </a>
                     </div>
@@ -247,11 +243,7 @@ if (isset($_SESSION['cart']['products'])){
 </main>
 <!-- ========== END MAIN CONTENT ========== -->
 
-
 </body>
 </html>
 
 <?php require "sections/footer.php"?>
-
-
-

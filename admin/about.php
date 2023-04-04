@@ -23,8 +23,3 @@
 
 <!-- Footer-->
 <?php require ('sections/footer.php'); ?>
-
-
-
-
-3.20/*8
