@@ -37,11 +37,14 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_FILES['image']) && i
 
 
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image_name = 'slides/' . basename($_FILES["image"]["name"]);
-        }
+            $image_name = 'buy_step/' . basename($_FILES["image"]["name"]);
+
       $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description', image = '$image_name'
                                WHERE id = $id";
-
+}else{
+            $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description'
+                               WHERE id = $id";
+        }
     if($conn->query($update_sql)){
         header( "Location: buy_step.php");
        }
@@ -72,7 +75,8 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_FILES['image']) && i
             <div class="mb-3">
                 <label for="description">Buy step haqida</label>
 
-                <textarea id="" name="description" class="form-control" rows="4" cols="50"></textarea>
+                <textarea id="" name="description" value="<?= isset($get_buy_step['description']) ? $get_buy_step['description'] : '' ?>"
+                          class="form-control" rows="4" cols="50"><?= isset($get_buy_step['description']) ? $get_buy_step['description'] : '' ?></textarea>
             </div>
 
             <div class="mb-3">

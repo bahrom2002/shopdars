@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -20,20 +21,19 @@ if (isset($_POST['firstname']) && isset($_POST['lastname'])
     && isset($_POST['username']) && isset($_POST['phone'])
     && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['gender'])){
 
-     $firstname = $_POST['firstname'];
-     $lastname = $_POST['lastname'];
-     $username = $_POST['username'];
-     $phone = $_POST['phone'];
-     $email = $_POST['email'];
-     $password = $_POST['password'];
-     $gender = $_POST['gender'];
+     $data = [
+         'firstname' => $_POST['firstname'],
+         'lastname' => $_POST['lastname'],
+         'username' => $_POST['username'],
+         'phone' => $_POST['phone'],
+         'email' => $_POST['email'],
+         'password' => $_POST['password'],
+         'gender' => $_POST['gender'],
+     ];
 
-     $insert_sql = "INSERT INTO user(firstname, lastname, username, phone, email, password, gender) 
-            VALUES ('$firstname', '$lastname', '$username', '$phone','$email', '$password', $gender)";
+     addUser($data);
 
-    if($conn->query($insert_sql)){
-        header( "Location: select-user.php");
-    }
+
 }
 
 ?>

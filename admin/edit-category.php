@@ -9,6 +9,7 @@
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -30,20 +31,13 @@ if ( isset($_POST['id']) && isset($_POST['name']) && isset($_POST['category_id']
     $id = $_POST['id'];
     if ($_POST['category_id'] != '') {
         $category_id = $_POST['category_id'];
-        $update_sql = "UPDATE category SET name = '$name', category_id = {$category_id} WHERE id = {$id}";
+        editCategory($id, $name, $category_id);
 
-    }else{
-        $update_sql = "UPDATE category SET name = '$name' WHERE id = {$id}";
-    }
-
-    if ($conn->query($update_sql)) {
-        header( "Location: select-category.php");
+    } else {
+        editCategory($id, $name);
     }
 }
-
-$cat_list = "SELECT * FROM category";
-$cat_list = $conn->query($cat_list);
-$cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
+         $cat_list = categoryList();
 ?>
 <!-- Section-->
 <section class="py-5">
@@ -61,7 +55,7 @@ $cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
                     <select class="form-select" name="category_id">
 
                         <option value="">Kategoriyalarni tanlang</option>
-                        <?php  foreach ($cat_list as $cat):?>
+                        <?php foreach ($cat_list as $cat):?>
                         <?php if ($cat_update['category_id'] == $cat['id']): ?>
                             <option selected value="<?= $cat['id']?>"><?= $cat['name']?></option>
                             <?php else:?>
@@ -81,5 +75,3 @@ $cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
 
 <!-- Footer-->
 <?php  require ('sections/footer.php'); ?>
-
-

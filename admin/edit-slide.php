@@ -81,7 +81,8 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price'])
             <div class="mb-3">
                 <label for="description">Mahsulot haqida</label>
 
-                <textarea id="" name="description" class="form-control" rows="4" cols="50"></textarea>
+                <textarea id="" name="description" value="<?= isset($get_slide['description']) ? $get_slide['description'] : '' ?>"
+                          class="form-control" rows="4" cols="50"><?= isset($get_slide['description']) ? $get_slide['description'] : '' ?></textarea>
             </div>
 
             <div class="mb-3">

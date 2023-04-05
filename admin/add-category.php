@@ -12,6 +12,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php  include('../dbmysql.php'); ?>
+<?php  include('functions.php'); ?>
 
     <?php
 
@@ -20,19 +21,15 @@ if (!isset($_SESSION['user']['username'])){
             $name = $_POST['name'];
             if ($_POST['category_id'] != '') {
                 $category_id = $_POST['category_id'];
-                $insert_sql = "INSERT INTO category (name, category_id) VALUES ('$name', $category_id)";
+                addCategory($name, $category_id);
 
             }else{
-                $insert_sql = "INSERT INTO category (name) VALUES ('$name')";
+                addCategory($name);
             }
-            if ($conn->query($insert_sql)) {
-                header( "Location: select-category.php");
-            }
+
         }
 
-            $cat_list = "SELECT * FROM category";
-            $cat_list = $conn->query($cat_list);
-            $cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
+           $cat_list = categoryList();
 ?>
 <!-- Section-->
 <section class="py-5">

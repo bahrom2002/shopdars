@@ -6,13 +6,12 @@ if (!isset($_SESSION['user']['username'])){
 
 <?php require ('sections/head.php'); ?>
 
-<!-- Navigation-->
+
 <?php require('sections/menu.php'); ?>
 
-<!-- Header-->
-<?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -34,13 +33,10 @@ if (isset($_POST['name']) && isset($_FILES['image']) && isset($_POST['level'])
         $insert_sql = "INSERT INTO buy_step (name,image,level, description) 
                                VALUES ('$name','$image_name', $level,'$description')";
 
+    }else{
+        addBuystep($name, $level, $description);
     }
 
-    if ($conn->query($insert_sql)) {
-        header("Location: buy_step.php");
-
-
-    }
 }
 ?>
 <!-- Section-->

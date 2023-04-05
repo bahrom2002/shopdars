@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -27,21 +28,18 @@ if (!isset($_SESSION['user']['username'])){
                 && isset($_POST['username']) && isset($_POST['phone'])
                 && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['gender'])){
 
-                 $id = $_POST['id'];
-                 $firstname = $_POST['firstname'];
-                 $lastname = $_POST['lastname'];
-                 $username = $_POST['username'];
-                 $phone = $_POST['phone'];
-                 $email = $_POST['email'];
-                 $password = $_POST['password'];
-                 $gender = $_POST['gender'];
+                $data = [
+                    'id' =>  $_POST['id'],
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
+                    'username' => $_POST['username'],
+                    'phone' => $_POST['phone'],
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    'gender' => $_POST['gender'],
+                ];
 
-                 $update_sql = "UPDATE user SET firstname = '$firstname', lastname = '$lastname', username = '$username', phone = '$phone',
-                 email = '$email', password = '$password', gender = '$gender' WHERE id = $id";
-
-                if($conn->query($update_sql)){
-                    header( "Location: select-user.php");
-                }
+                editUser($data);
             }
 
             ?>

@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -29,6 +30,8 @@ if (isset($_FILES['image']) && isset($_POST['level'])) {
 
         $insert_sql = "INSERT INTO partners (image,level)  VALUES ('$image_name',$level)";
 
+    }else{
+        $insert_sql = "INSERT INTO partners (level)  VALUES ($level)";
     }
 
     if ($conn->query($insert_sql)) {

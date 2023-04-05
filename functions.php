@@ -2,7 +2,7 @@
 include ('dbmysql.php');
 
 
-function Product(){
+function allProduct(){
     global $conn;
     $product = "SELECT * FROM product ";
     $products = $conn->query($product);

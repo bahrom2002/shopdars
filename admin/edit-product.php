@@ -53,7 +53,7 @@ if (!isset($_SESSION['user']['username'])){
 
 
                     if($conn->query($update_sql)){
-                        header( "Location: select-product.php");
+                        header( "Location: product.php");
                   }
     }
 
@@ -99,7 +99,8 @@ if (!isset($_SESSION['user']['username'])){
             <div class="mb-3">
                 <label for="description">Mahsulot haqida</label>
 
-                <textarea id="" name="description" class="form-control" rows="4" cols="50"></textarea>
+                <textarea id="description" name="description" value="<?= isset($get_product['description']) ? $get_product['description'] : '' ?>"
+                class="form-control" rows="4" cols="50"><?= isset($get_product['description']) ? $get_product['description'] : '' ?></textarea>
             </div>
 
             <div class="mb-3">

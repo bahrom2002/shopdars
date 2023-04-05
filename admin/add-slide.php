@@ -33,11 +33,13 @@ if (isset($_POST['name']) && isset($_POST['price'])
         $insert_sql = "INSERT INTO slide (name,price,image, level, description) 
                                VALUES ('$name', $price,'$image_name', $level,'$description')";
 
+    }else{
+        $insert_sql = "INSERT INTO slide (name,price, level, description) 
+                               VALUES ('$name', $price, $level,'$description')";
     }
 
     if ($conn->query($insert_sql)) {
         header("Location: slide.php");
-
 
     }
 }

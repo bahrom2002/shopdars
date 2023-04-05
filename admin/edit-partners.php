@@ -13,9 +13,9 @@ if (!isset($_SESSION['user']['username']) AND !isset($_SESSION['user']['id'])){
 <?php
 if (isset($_GET['id'])){
     $id = $_GET['id'];
-    $product_sql = "SELECT * FROM partners WHERE id = {$id}";
-    $get_pro = $conn->query($product_sql);
-    $get_pro = $get_pro->fetch_assoc();
+    $partners_sql = "SELECT * FROM partners WHERE id = {$id}";
+    $get_part = $conn->query($partners_sql);
+    $get_part = $get_part->fetch_assoc();
 }
 ?>
 
@@ -26,9 +26,10 @@ if (isset($_POST['id']) && isset($_FILES['image']) && isset($_POST['level'])){
     $id = $_POST['id'];
     $level = $_POST['level'];
 
-    $cat_sql = ''; // ''
+    $cat_sql = '';
     $folder = "../partners/";
     $folder_file = $folder . basename($_FILES["image"]["name"]);
+
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $folder_file)){
         $image_name = 'partners/' . basename($_FILES["image"]["name"]);
     }
@@ -56,13 +57,13 @@ if (isset($_POST['id']) && isset($_FILES['image']) && isset($_POST['level'])){
 
         <form action="edit-partners.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <input type="hidden" name="id" value="<?= isset($get_pro['id']) ? $get_pro['id'] : '' ?>">
+                <input type="hidden" name="id" value="<?= isset($get_part['id']) ? $get_part['id'] : '' ?>">
                 <label for="image" class="form-label">slide rasmi</label>
-                <input name="image" type="file" value="<?= isset($get_pro['image'] ) ? $get_pro['image'] : NULL  ?>" class="form-control" id="image" placeholder="Hamkorlar rasmi"><br>
+                <input name="image" type="file" value="<?= isset($get_part['image'] ) ? $get_part['image'] : NULL  ?>" class="form-control" id="image" placeholder="Hamkorlar rasmi"><br>
             </div>
             <div class="mb-3">
                 <label for="level" class="form-label">level </label>
-                <input name="level" type="number" value="<?= isset($get_pro['level']) ? $get_pro['level'] : ''  ?>" class="form-control" id="level" placeholder="level"><br>
+                <input name="level" type="number" value="<?= isset($get_part['level']) ? $get_part['level'] : ''  ?>" class="form-control" id="level" placeholder="level"><br>
             </div>
 
             <div class="mb-3" style="display:flex;justify-content: space-between">

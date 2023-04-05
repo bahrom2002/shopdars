@@ -7,7 +7,7 @@ require 'dbmysql.php';
 
 require 'functions.php';
 
-$top_products = Product();
+$top_products = allProduct();
 ?>
 
 

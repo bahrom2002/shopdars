@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -45,13 +46,11 @@ if (isset($_POST['name']) && isset($_POST['price'])
              }
 
          if($conn->query($insert_sql)){
-            header( "Location: select-product.php");
+            header( "Location: product.php");
         }
 }
 
-$cat_list = "SELECT * FROM category";
-$cat_list = $conn->query($cat_list);
-$cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
+$cat_list = categoryList();
 ?>
 <!-- Section-->
 <section class="py-5">
