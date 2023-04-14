@@ -18,24 +18,14 @@ if (!isset($_SESSION['user']['username'])){
 if (isset($_POST['name']) && isset($_FILES['image']) && isset($_POST['level'])
     && isset($_POST['description'])) {
 
-    $name = $_POST['name'];
-    $level = $_POST['level'];
-    $description = $_POST['description'];
+    $data = [
+    'name' => $_POST['name'],
+    'level' => $_POST['level'],
+    'description' => $_POST['description'],
+    ];
 
 
-    $folder = "../buy_step/";
-    $target_file = $folder . basename($_FILES["image"]["name"]);
-
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $image_name = 'buy_step/' . basename($_FILES["image"]["name"]);
-
-
-        $insert_sql = "INSERT INTO buy_step (name,image,level, description) 
-                               VALUES ('$name','$image_name', $level,'$description')";
-
-    }else{
-        addBuystep($name, $level, $description);
-    }
+   addBuystep($data);
 
 }
 ?>

@@ -27,7 +27,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname'])
          'username' => $_POST['username'],
          'phone' => $_POST['phone'],
          'email' => $_POST['email'],
-         'password' => $_POST['password'],
+         'password' => md5(md5($_POST['password'])),
          'gender' => $_POST['gender'],
      ];
 

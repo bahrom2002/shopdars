@@ -17,14 +17,13 @@ if (!isset($_SESSION['user']['username'])){
 
 <?php
 
-      if (isset($_GET['id'])){
+if (isset($_GET['id'])){
           $id = $_GET['id'];
           $get_user_sql = "SELECT * FROM user WHERE id = $id";
           $get_user = $conn->query($get_user_sql);
           $get_user = $get_user->fetch_assoc();
-      }
-
-            if (isset($_POST['id']) && isset($_POST['firstname']) && isset($_POST['lastname'])
+}
+if (isset($_POST['id']) && isset($_POST['firstname']) && isset($_POST['lastname'])
                 && isset($_POST['username']) && isset($_POST['phone'])
                 && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['gender'])){
 
@@ -35,14 +34,13 @@ if (!isset($_SESSION['user']['username'])){
                     'username' => $_POST['username'],
                     'phone' => $_POST['phone'],
                     'email' => $_POST['email'],
-                    'password' => $_POST['password'],
+                    'password' => md5(md5( $_POST['password'])),
                     'gender' => $_POST['gender'],
                 ];
 
                 editUser($data);
             }
-
-            ?>
+?>
     <!-- Section-->
 <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">

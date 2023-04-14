@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 if (isset($_GET['id'])){
@@ -26,28 +27,15 @@ if (isset($_GET['id'])){
 if (isset($_POST['id']) && isset($_POST['name']) && isset($_FILES['image']) && isset($_POST['level'])
     && isset($_POST['description'])){
 
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $level = $_POST['level'];
-    $description = $_POST['description'];
+    $data = [
+         'id' =>  $_POST['id'],
+        'name' => $_POST['name'],
+        'level' => $_POST['level'],
+        'description' => $_POST['description'],
+    ];
 
 
-        $folder = "../buy_step";
-        $target_file = $folder . basename($_FILES['image']["name"]);
 
-
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image_name = 'buy_step/' . basename($_FILES["image"]["name"]);
-
-      $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description', image = '$image_name'
-                               WHERE id = $id";
-}else{
-            $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description'
-                               WHERE id = $id";
-        }
-    if($conn->query($update_sql)){
-        header( "Location: buy_step.php");
-       }
 }
 ?>
 <!-- Section-->

@@ -24,13 +24,15 @@ if (isset($_FILES['image']) && isset($_POST['level'])) {
     $folder = "../partners/";
     $target_file = $folder . basename($_FILES["image"]["name"]);
 
+
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $image_name = 'partners/' . basename($_FILES["image"]["name"]);
+            $image_name = 'partners/' . basename($_FILES["image"]["name"]);
 
 
-        $insert_sql = "INSERT INTO partners (image,level)  VALUES ('$image_name',$level)";
+            $insert_sql = "INSERT INTO partners(image, level)  VALUES('$image_name',$level)";
 
-    }else{
+
+        }else{
         $insert_sql = "INSERT INTO partners (level)  VALUES ($level)";
     }
 

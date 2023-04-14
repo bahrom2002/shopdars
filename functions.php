@@ -38,13 +38,23 @@ function getPartners(){
     return $partners->fetch_all(MYSQLI_ASSOC);
 }
 
-function getProducts($ids){
+function getProductsCart($cart_products){
     global $conn;
+    $ids = array_column($cart_products,'product_id');
     if (count($ids) > 0){
         $ids = implode(',', $ids);
-        $product = "SELECT * FROM product WHERE id IN($ids)  ";
+        $product = "SELECT * FROM product WHERE id IN($ids)";
         $products = $conn->query($product);
-        return $products->fetch_all(MYSQLI_ASSOC);
+        $products =  $products->fetch_all(MYSQLI_ASSOC);
+
+        foreach ($products as $key => $value){
+            foreach ($cart_products as $key2 => $value2){
+                if($value2['product_id'] == $value['id']){
+                    $products[$key]['count'] = $cart_products[$key2]['count'];
+                }
+            }
+        }
+        return $products;
     }else{
         return [];
     }

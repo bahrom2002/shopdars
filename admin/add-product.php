@@ -21,33 +21,16 @@ if (isset($_POST['name']) && isset($_POST['price'])
     && isset($_POST['category_id']) && isset($_POST['instock'])
     && isset($_POST['description']))
 {
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $category_id = $_POST['category_id'];
-    $instock = $_POST['instock'];
-    $description = $_POST['description'];
+    $data = [
+    'name' => $_POST['name'],
+    'price' => $_POST['price'],
+    'category_id' => $_POST['category_id'],
+    'instock' => $_POST['instock'],
+    'description' => $_POST['description'],
+    ];
 
 
-    if (isset($_FILES['image'])){
-        $folder = "../uploads/";
-        $target_file = $folder . basename($_FILES["image"]["name"]);
-
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
-                    $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
-                }
-
-                $insert_sql = "INSERT INTO product (name,price,category_id, instock, description,image) 
-                               VALUES ('$name', $price,$category_id, $instock,'$description', '$image_name')";
-
-        }else{
-                    $insert_sql = "INSERT INTO product (name,price,category_id, instock, description) 
-                                   VALUES ('$name', $price,$category_id, $instock,'$description')";
-
-             }
-
-         if($conn->query($insert_sql)){
-            header( "Location: product.php");
-        }
+  addProduct($data);
 }
 
 $cat_list = categoryList();

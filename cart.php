@@ -2,18 +2,19 @@
 session_start();
 require "sections/head.php";
 require "sections/header.php";
-
 include ('dbmysql.php');
-
 include ('functions.php');
 
 
 if (isset($_SESSION['cart']['products'])){
     $products = $_SESSION['cart']['products'];
 
-    $products = getProducts($products);
+    $products = getProductsCart($products);
 
 }
+
+$count_all = isset($_SESSION['cart']['count']) ? $_SESSION['cart']['count'] : 0;
+$total = 0;
 ?>
 
 <!DOCTYPE html>
@@ -43,20 +44,23 @@ if (isset($_SESSION['cart']['products'])){
                     <!-- List Group -->
                     <ul class="list-group list-group-flush list-group-no-gutters mb-5">
                        <?php foreach ($products as $product): ?>
+                       <?php
+                       $total += $product['price'] * $product['count'];
+                       ?>
                         <!-- Item -->
                         <li class="list-group-item">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
-                                    <img class="avatar avatar-xl avatar-4x3" src="<?= isset($product['image']) ?$product['image'] : '' ?>" alt="Image Description">
+                                    <img class="avatar avatar-xl avatar-4x3" src="<?= isset($product['image']) ? $product['image'] : '' ?>" alt="Image Description">
                                 </div>
 
                                 <div class="flex-grow-1 ms-3">
                                     <div class="row">
                                         <div class="col-sm-7 mb-3 mb-sm-0">
-                                            <h5><a class="text-dark" href="#"><?= isset($product['name']) ?$product['name'] : '' ?></a></h5>
+                                            <h5><a class="text-dark" href="#"><?= isset($product['name']) ? $product['name'] : '' ?></a></h5>
 
                                             <div class="d-block d-sm-none">
-                                                <h5 class="mb-1">$<?= isset($product['price']) ?$product['price'] : '' ?></h5>
+                                                <h5 class="mb-1">$<?= isset($product['price']) ? $product['price'] : '' ?></h5>
                                             </div>
 
                                             <div class="d-grid gap-1">
@@ -82,24 +86,13 @@ if (isset($_SESSION['cart']['products'])){
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <!-- Select -->
-                                                    <select class="form-select form-select-sm mb-3">
-                                                        <option value="quantity1">1</option>
-                                                        <option value="quantity2">2</option>
-                                                        <option value="quantity3">3</option>
-                                                        <option value="quantity4">4</option>
-                                                        <option value="quantity5">5</option>
-                                                        <option value="quantity6">6</option>
-                                                        <option value="quantity7">7</option>
-                                                        <option value="quantity8">8</option>
-                                                        <option value="quantity9">9</option>
-                                                        <option value="quantity10">10</option>
-                                                    </select>
+                                                    <input class="form-control count-number" type="number" product-id="<?=$product['id']?>" value="<?=$product['count'] ? $product['count'] : '' ?>">
                                                     <!-- End Select -->
                                                 </div>
 
                                                 <div class="col-auto">
                                                     <div class="d-grid gap-2">
-                                                        <a class="link-sm link-secondary small" href="delete-cart.php?id=<?= isset($product['id']) ?$product['id'] : '' ?>";">
+                                                        <a class="link-sm link-secondary small" href="delete-cart.php?id=<?= isset($product['id']) ? $product['id'] : '' ?>">
                                                             <i class="bi-trash me-1"></i> Remove
                                                         </a>
 
@@ -157,8 +150,8 @@ if (isset($_SESSION['cart']['products'])){
                                 <div class="border-bottom pb-4 mb-4">
                                     <div class="d-grid gap-3">
                                         <dl class="row">
-                                            <dt class="col-sm-6">Item subtotal (2)</dt>
-                                            <dd class="col-sm-6 text-sm-end mb-0">$73.98</dd>
+                                            <dt class="col-sm-6">Umumiy soni (<span class="count-all" ><?= $count_all ?></span>)</dt>
+                                            <dd class="col-sm-6 text-sm-end mb-0 "><span class="total">$<?= $total ?></span></dd>
                                         </dl>
                                         <!-- End Row -->
 

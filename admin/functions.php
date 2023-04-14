@@ -73,7 +73,7 @@ function editCategory($id, $name, $category_id = null){
     global $conn;
 
     if (is_null($category_id)){
-        $sql = "UPDATE category SET name = '$name', category_id = {$category_id} WHERE id = {$id}";
+        $sql = "UPDATE category SET name = '$name', category_id = $category_id WHERE id = $id";
     }else{
         $sql = "UPDATE category SET name = '$name' WHERE id = {$id}";
     }
@@ -96,7 +96,7 @@ function addUser($data){
     $lastname = $data['lastname'];
     $username = $data['username'];
     $phone = $data['phone'];
-    $password = $data['password'];
+    $password = md5(md5($data['password']));
     $gender = $data['gender'];
     $email = $data['email'];
 
@@ -115,7 +115,7 @@ function editUser($data){
     $lastname = $data['lastname'];
     $username = $data['username'];
     $phone = $data['phone'];
-    $password = $data['password'];
+    $password = md5(md5($data['password']));
     $gender = $data['gender'];
     $email = $data['email'];
 
@@ -127,6 +127,68 @@ function editUser($data){
     }
 }
 
+function addProduct($data){
+    global $conn;
+
+    $name = $data['name'];
+    $price = $data['price'];
+    $category_id = $data['category_id'];
+    $instock = $data['instock'];
+    $description = $data['description'];
+
+    if (isset($_FILES['image'])){
+        $folder = "../uploads/";
+        $target_file = $folder . basename($_FILES["image"]["name"]);
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
+            $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
+        }
+
+        $insert_sql = "INSERT INTO product (name,price,category_id, instock, description,image) 
+                               VALUES ('$name', $price,$category_id, $instock,'$description', '$image_name')";
+
+    }else{
+        $insert_sql = "INSERT INTO product (name,price,category_id, instock, description) 
+                                   VALUES ('$name', $price,$category_id, $instock,'$description')";
+
+    }if ($conn->query($insert_sql)){
+        redirect('product');
+    }
+
+}
+
+function editProduct($data){
+    global $conn;
+
+    $id = $data['id'];
+    $name = $data['name'];
+    $price = $data['price'];
+    $category_id = $data['category_id'];
+    $instock = $data['instock'];
+    $description = $data['description'];
+
+    if (isset($_FILES['image'])){
+        $folder = "../uploads";
+        $target_file = $folder . basename($_FILES['image']["name"]);
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
+            $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
+        }
+        $update_sql = "UPDATE product 
+                               SET name = '$name', price = $price, category_id = $category_id, instock = '$instock', description = '$description', image = '$image_name'
+                               WHERE id = $id";
+    }else{
+        $update_sql = "UPDATE product 
+                               SET name = '$name', price = $price, category_id = $category_id, instock = '$instock', description = '$description' 
+                               WHERE id = $id";
+    }
+
+
+    if($conn->query($update_sql)){
+      redirect('product');
+    }
+}
+
 function addSlide($data){
     global $conn;
 
@@ -135,22 +197,133 @@ function addSlide($data){
     $level = $data['level'];
     $description = $data['description'];
 
-    $sql = "INSERT INTO slide (name, price, level, description)
-                    VALUES ($name, $price, $level, $description)";
 
-    if($conn->query($sql)){
-        redirect('slide');
+    $folder = "../slides/";
+    $target_file = $folder . basename($_FILES["image"]["name"]);
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image_name = 'slides/' . basename($_FILES["image"]["name"]);
+
+
+        $insert_sql = "INSERT INTO slide (name,price,image, level, description) 
+                               VALUES ('$name', $price,'$image_name', $level,'$description')";
+
+    }else{
+        $insert_sql = "INSERT INTO slide (name,price, level, description) 
+                               VALUES ('$name', $price, $level,'$description')";
     }
+
+    if ($conn->query($insert_sql)) {
+        redirect('slide');
+
+    }
+
 }
 
-function addBuystep($name, $level, $description){
+function editSlide($data){
+    global  $conn;
+
+    $id = $data['id'];
+    $name = $data['name'];
+    $price = $data['price'];
+    $level = $data['level'];
+    $description = $data['description'];
+
+    $folder = "../slides";
+    $target_file = $folder . basename($_FILES['image']["name"]);
+
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image_name = 'slides/' . basename($_FILES["image"]["name"]);
+    }
+
+    $update_sql = "UPDATE slide 
+                   SET name = '$name', price = $price,level = '$level',
+                       description = '$description', image = '$image_name'
+                   WHERE id = $id";
+
+    if($conn->query($update_sql)){
+       redirect('slide');
+    }
+
+}
+
+function addPartners($level){
     global $conn;
 
-    $sql = "INSERT INTO buy_step (name, level, description) 
-                               VALUES ('$name',  $level,'$description')";
+    $level = $_POST['level'];
 
-    if($conn->query($sql)){
-        redirect('buy_step');
+    $folder = "../partners/";
+    $target_file = $folder . basename($_FILES["image"]["name"]);
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image_name = 'partners/' . basename($_FILES["image"]["name"]);
+
+
+        $sql = "INSERT INTO partners(image, level)  VALUES('$image_name',$level)";
+
+    }else{
+        $sql = "INSERT INTO partners (level)  VALUES ($level)";
+    }
+
+    if ($conn->query($sql)) {
+        redirect('partners');
+
     }
 }
+
+function addBuystep($data){
+    global $conn;
+
+    $name = $data['name'];
+    $level = $data['level'];
+    $description = $data['description'];
+
+    $folder = "../buy_step/";
+    $target_file = $folder . basename($_FILES["image"]["name"]);
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image_name = 'buy_step/' . basename($_FILES["image"]["name"]);
+
+
+        $insert_sql = "INSERT INTO buy_step (name,image,level, description) 
+                               VALUES ('$name','$image_name', $level,'$description')";
+
+    }else{
+        $insert_sql = "INSERT INTO buy_step (name, level, description) 
+                               VALUES ('$name',,  $level,'$description')";
+    }
+
+    if ($conn->query($insert_sql)) {
+        redirect('buy_step');
+
+    }
+}
+
+function editBuystep($data){
+    global $conn;
+
+    $id = $data['id'];
+    $name = $data['name'];
+    $level = $data['level'];
+    $description = $data['description'];
+
+    $folder = "../buy_step";
+    $target_file = $folder . basename($_FILES['image']["name"]);
+
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image_name = 'buy_step/' . basename($_FILES["image"]["name"]);
+
+        $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description', image = '$image_name'
+                               WHERE id = $id";
+    }else{
+        $update_sql = "UPDATE buy_step SET name = '$name', level = '$level', description = '$description'
+                               WHERE id = $id";
+    }
+    if($conn->query($update_sql)){
+       redirect('buy_step');
+    }
+}
+
 

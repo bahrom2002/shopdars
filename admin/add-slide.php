@@ -10,6 +10,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php require('sections/menu.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
 
@@ -17,31 +18,15 @@ if (isset($_POST['name']) && isset($_POST['price'])
     && isset($_FILES['image']) && isset($_POST['level'])
     && isset($_POST['description'])) {
 
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $level = $_POST['level'];
-    $description = $_POST['description'];
+    $data = [
+    'name' => $_POST['name'],
+    'price' => $_POST['price'],
+    'level' => $_POST['level'],
+    'description' => $_POST['description'],
+    ];
 
+addSlide($data);
 
-    $folder = "../slides/";
-    $target_file = $folder . basename($_FILES["image"]["name"]);
-
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $image_name = 'slides/' . basename($_FILES["image"]["name"]);
-
-
-        $insert_sql = "INSERT INTO slide (name,price,image, level, description) 
-                               VALUES ('$name', $price,'$image_name', $level,'$description')";
-
-    }else{
-        $insert_sql = "INSERT INTO slide (name,price, level, description) 
-                               VALUES ('$name', $price, $level,'$description')";
-    }
-
-    if ($conn->query($insert_sql)) {
-        header("Location: slide.php");
-
-    }
 }
 ?>
 <!-- Section-->

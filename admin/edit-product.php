@@ -13,6 +13,7 @@ if (!isset($_SESSION['user']['username'])){
 <?php // require ('sections/header.php'); ?>
 
 <?php include ('../dbmysql.php'); ?>
+<?php include ('functions.php'); ?>
 
 <?php
     if (isset($_GET['id'])){
@@ -27,40 +28,19 @@ if (!isset($_SESSION['user']['username'])){
             && isset($_POST['category_id']) && isset($_POST['instock'])
             && isset($_POST['description'])){
 
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $category_id = $_POST['category_id'];
-            $instock = $_POST['instock'];
-            $description = $_POST['description'];
+            $data = [
+                'id' =>   $_POST['id'],
+                'name' => $_POST['name'],
+                'price' => $_POST['price'],
+                'category_id' => $_POST['category_id'],
+                'instock' => $_POST['instock'],
+                'description' => $_POST['description'],
+            ];
 
-            if (isset($_FILES['image'])){
-                $folder = "../uploads";
-                $target_file = $folder . basename($_FILES['image']["name"]);
-
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
-                    $image_name = 'uploads/' . basename($_FILES["image"]["name"]);
-                }
-                $update_sql = "UPDATE product 
-                               SET name = '$name', price = $price, category_id = $category_id, instock = '$instock', description = '$description', image = '$image_name'
-                               WHERE id = $id";
-            }else{
-                $update_sql = "UPDATE product 
-                               SET name = '$name', price = $price, category_id = $category_id, instock = '$instock', description = '$description' 
-                               WHERE id = $id";
-            }
-
-
-
-                    if($conn->query($update_sql)){
-                        header( "Location: product.php");
-                  }
+           editProduct($data);
     }
-
-                $cat_list = "SELECT * FROM category";
-                $cat_list = $conn->query($cat_list);
-                $cat_list = $cat_list->fetch_all(MYSQLI_ASSOC);
-        ?>
+        $cat_list = categoryList();
+?>
 <!-- Section-->
 <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
