@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require "sections/head.php";
 require "sections/header.php";
 include ('dbmysql.php');
@@ -155,54 +156,13 @@ $total = 0;
                                         </dl>
                                         <!-- End Row -->
 
-                                        <dl class="row">
-                                            <dt class="col-sm-6">Delivery</dt>
-                                            <dd class="col-sm-6 text-sm-end mb-0">Free</dd>
-                                        </dl>
+
                                         <!-- End Row -->
                                     </div>
                                 </div>
 
-                                <div class="border-bottom pb-4 mb-4">
-                                    <div class="d-grid gap-3">
-                                        <!-- Check -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="deliveryRadioName" id="deliveryRadio1" checked>
-                                            <label class="form-check-label text-dark" for="deliveryRadio1">
-                                                Free - Standard delivery
-                                                <span class="d-block text-muted small">Shipment may take 5-6 business days</span>
-                                            </label>
-                                        </div>
-                                        <!-- End Check -->
-
-                                        <!-- Check -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="deliveryRadioName" id="deliveryRadio2">
-                                            <label class="form-check-label text-dark" for="deliveryRadio2">
-                                                $7.99 - Express delivery
-                                                <span class="d-block text-muted small">Shipment may take 2-3 business days</span>
-                                            </label>
-                                        </div>
-                                        <!-- End Check -->
-                                    </div>
-                                </div>
-
-                                <div class="d-grid gap-3 mb-4">
-                                    <dl class="row">
-                                        <dt class="col-sm-6">Estimated tax</dt>
-                                        <dd class="col-sm-6 text-sm-end mb-0">$0.00</dd>
-                                    </dl>
-                                    <!-- End Row -->
-
-                                    <dl class="row">
-                                        <dt class="col-sm-6">Total</dt>
-                                        <dd class="col-sm-6 text-sm-end mb-0">$73.98</dd>
-                                    </dl>
-                                    <!-- End Row -->
-                                </div>
-
                                 <div class="d-grid">
-                                    <a class="btn btn-primary btn-lg" href="../demo-shop/checkout.html">Checkout</a>
+                                    <a class="btn btn-primary btn-lg" href="order.php">Buyurtma berish</a>
                                 </div>
                             </form>
                         </div>

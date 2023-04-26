@@ -1,30 +1,22 @@
-<?php session_start(); ?>
-
-<?php require ('dbmysql.php');?>
-
 <?php
-if (isset($_SESSION['user']['username'])){
-    header('location: index.php');
+session_start();
+require 'functions.php';
 
-}if (isset($_POST['login']) && $_POST['login'] != '' && isset($_POST['password']) && $_POST['password'] != ''){
-    $login = $_POST['login'];
+if (isset($_POST['username']) && isset($_POST['password'])){
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $login_sql = "SELECT * FROM user WHERE username = '$login' AND password = '$password'";
-    $result = $conn->query($login_sql);
-    $user = $result->fetch_assoc();
+    $error = '';
 
-    if (!is_null($user)){
-        $_SESSION['user']['username'] = $login;
-        $_SESSION['user']['id'] = $user['id'];
+    $login = login($username, $password);
 
-        header('location: index.php');
-    }else{
-        $error = 'login yoki parol xato kiritildi';
+    if (!$login){
+        $error = "Login yoki parolni xato kiritdingiz";
     }
 }
-?>
 
+
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="" class="h-100">
@@ -55,20 +47,20 @@ if (isset($_SESSION['user']['username'])){
     <div class="container-fluid">
         <nav class="navbar-nav-wrap">
             <!-- White Logo -->
-            <a class="navbar-brand d-none d-lg-flex" href="./index.html" aria-label="Front">
+            <a class="navbar-brand d-none d-lg-flex" href="/" aria-label="Front">
                 <img class="navbar-brand-logo" src="./assets/svg/logos/logo-white.svg" alt="Logo">
             </a>
             <!-- End White Logo -->
 
             <!-- Default Logo -->
-            <a class="navbar-brand d-flex d-lg-none" href="./index.html" aria-label="Front">
+            <a class="navbar-brand d-flex d-lg-none" href="/" aria-label="Front">
                 <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo">
             </a>
             <!-- End Default Logo -->
 
             <div class="ms-auto">
-                <a class="link link-sm link-secondary" href="./index.html">
-                    <i class="bi-chevron-left small ms-1"></i> Go to main
+                <a class="link link-sm link-secondary" href="/">
+                    <i class="bi-chevron-left small ms-1"></i> Bosh sahifaga
                 </a>
             </div>
         </nav>
@@ -131,18 +123,25 @@ if (isset($_SESSION['user']['username'])){
                 <div class="flex-grow-1 mx-auto" style="max-width: 28rem;">
                     <!-- Heading -->
                     <div class="text-center mb-5 mb-md-7">
-                        <h1 class="h2">Welcome back</h1>
-                        <p>Hisobingizni boshqarish uchun tizimga kiring.</p>
+                        <h1 class="h2">Xush kelibsiz</h1>
+                        <p>Kirish uchun qo'ydagilarni kiriting.</p>
+
+
+                        <?php if (isset($error) && $error != ''):?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= $error; ?>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <!-- End Heading -->
 
                     <!-- Form -->
-                    <form class="js-validate needs-validation" novalidate>
+                    <form action="login.php" method="post" novalidate="">
                         <!-- Form -->
                         <div class="mb-4">
-                            <label class="form-label" for="signupModalFormLoginEmail">Username kiriting</label>
-                            <input type="text" class="form-control form-control-lg" name="user" id="signupModalFormLoginEmail" placeholder="username" aria-label="username" required>
-                            <span class="invalid-feedback">Iltimos, to'g'ri username kiriting.</span>
+                            <label class="form-label" for="signupModalFormLoginusername">Login</label>
+                            <input type="text" class="form-control form-control-lg" name="username" id="signupModalFormLoginusername" placeholder="Login" aria-label="email@site.com" required="">
+                            <span class="invalid-feedback">Please enter a valid email address.</span>
                         </div>
                         <!-- End Form -->
 
@@ -151,32 +150,31 @@ if (isset($_SESSION['user']['username'])){
                             <div class="d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="signupModalFormLoginPassword">Parol</label>
 
-                                <a class="form-label-link" href="./page-reset-password.html">Parolni unutdingizmi?</a>
+                                <a class="form-label-link" href="reset-password">Parolni unutdingizmi?</a>
                             </div>
 
-                            <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                                <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupModalFormLoginPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8"
-                                       data-hs-toggle-password-options='{
-                         "target": "#changePassTarget",
-                         "defaultClass": "bi-eye-slash",
-                         "showClass": "bi-eye",
-                         "classChangeTarget": "#changePassIcon"
-                       }'>
+                            <div class="input-group input-group-merge" data-hs-validation-validate-class="">
+                                <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupModalFormLoginPassword" placeholder="Parol" aria-label="8+ characters required" required="" minlength="8" data-hs-toggle-password-options="{
+                         &quot;target&quot;: &quot;#changePassTarget&quot;,
+                         &quot;defaultClass&quot;: &quot;bi-eye-slash&quot;,
+                         &quot;showClass&quot;: &quot;bi-eye&quot;,
+                         &quot;classChangeTarget&quot;: &quot;#changePassIcon&quot;
+                       }">
                                 <a id="changePassTarget" class="input-group-append input-group-text" href="javascript:;">
-                                    <i id="changePassIcon" class="bi-eye"></i>
+                                    <i id="changePassIcon" class="bi-eye-slash"></i>
                                 </a>
                             </div>
 
-                            <span class="invalid-feedback">Yaroqli parolni kiriting.</span>
+                            <span class="invalid-feedback">Please enter a valid password.</span>
                         </div>
                         <!-- End Form -->
 
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Log in</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Kirish</button>
                         </div>
 
                         <div class="text-center">
-                            <p>Hali hisobingiz yo'qmi?<a class="link" href="sigin_up.php"> Bu yerda roʻyxatdan oʻting</a></p>
+                            <p>Accountingiz yuqmi? <a class="link" href="signup.php">Ro'yxatdan o'tish</a></p>
                         </div>
                     </form>
                     <!-- End Form -->

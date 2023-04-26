@@ -41,58 +41,14 @@
                     <!-- End Dropdown -->
 
                     <li class="nav-item">
-                        <a class="nav-link " href="demo-shop/product-overview.html">Product Overview</a>
+                        <a class="nav-link " href="yourorder.php">Buyurtmalar</a>
                     </li>
 
                     <!-- Pages -->
-                    <li class="hs-has-mega-menu nav-item"
-                        data-hs-mega-menu-item-options='{
-                  "desktop": {
-                    "position": "right",
-                    "maxWidth": "27rem"
-                  }
-                }'>
-                        <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link dropdown-toggle " aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accaunt.php" >Profil</a>
 
                         <!-- Mega Menu -->
-                        <div class="hs-mega-menu dropdown-menu" aria-labelledby="pagesMegaMenu" style="min-width: 27rem;">
-                            <div class="navbar-dropdown-menu-inner">
-                                <span class="dropdown-header">Elements</span>
-
-                                <div class="row">
-                                    <div class="col-sm mb-3 mb-sm-0">
-                                        <a class="dropdown-item " href="demo-shop/categories.html">Categories</a>
-                                        <a class="dropdown-item " href="demo-shop/categories-sidebar.html">Categories Sidebar</a>
-                                        <a class="dropdown-item " href="demo-shop/empty-cart.html">Empty Cart</a>
-                                    </div>
-                                    <!-- End Col -->
-
-                                    <div class="col-sm">
-                                        <a class="dropdown-item " href="demo-shop/cart.html">Cart</a>
-                                        <a class="dropdown-item " href="demo-shop/checkout.html">Checkout</a>
-                                        <a class="dropdown-item " href="demo-shop/order-completed.html">Order Completed</a>
-                                    </div>
-                                    <!-- End Col -->
-                                </div>
-                                <!-- End Row -->
-                            </div>
-
-                            <!-- Mega Menu Banner -->
-                            <div class="navbar-dropdown-menu-shop-banner">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0">
-                                        <img class="navbar-dropdown-menu-shop-banner-img" src="assets/img/mockups/img4.png" alt="Image Description">
-                                    </div>
-
-                                    <div class="flex-grow-1 p-4">
-                                        <span class="h4 d-block text-primary">Win T-Shirt</span>
-                                        <p>Win one of our Front brand T-shirts.</p>
-                                        <a class="btn btn-sm btn-soft-primary btn-transition" href="index.html">Learn more <i class="bi-chevron-right small"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Mega Menu Banner -->
-                        </div>
                         <!-- End Mega Menu -->
                     </li>
                     <!-- End Pages -->
@@ -109,13 +65,21 @@
                             <i class="bi-basket"></i>
                         </button>
                         <a type="button" class="btn btn-primary" href="cart.php">
-                            Cart <span class="badge badge-light" id="count-cart"><?= isset($_SESSION['cart']['count']) ? $_SESSION['cart']['count'] : ''?></span>
+                        Cart<span class="badge badge-light" id="count-cart"><?= isset($_SESSION['cart']['count']) ? $_SESSION['cart']['count'] : ''?></span>
                         </a>
                         <!-- End Shopping Cart -->
 
-                        <button class="btn btn-primary btn-transition" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Login</button>
+                        <ul class="badge badge-light">
+                            <li class="nav-item dropdown">
+                        <a class="btn btn-primary btn-transition" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : '' ?></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Kabinet</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="logout.php">Chiqish</a></li>
+                        </ul>
                     </li>
                 </ul>
+
             </div>
             <!-- End Collapse -->
         </nav>

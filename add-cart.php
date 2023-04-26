@@ -3,6 +3,7 @@ session_start();
 
 if ($_GET['id']) {
     $id = $_GET['id'];
+
     if (isset($_SESSION['cart']['count'])) {
         $_SESSION['cart']['count']++;
     } else {

@@ -326,4 +326,24 @@ function editBuystep($data){
     }
 }
 
+function Sign_up($data){
+    global $conn;
+
+    $username = $data['username'];
+    $email = $data['email'];
+    $password = md5(md5($data['password']));
+    $password2 = md5(md5($data['password2']));
+
+    if ($password == $password2){
+        $sql = "INSERT INTO user(username, email, password) VALUES ('$username', '$email', '$password')";
+
+    }else{
+        $error = "parolni xato kiritdingiz";
+    }
+    if ($conn->query($sql)){
+        header("Location: index.php");
+    }
+
+}
+
 

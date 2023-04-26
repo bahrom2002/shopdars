@@ -1,5 +1,3 @@
-
-
 $(document).ready(function (){
     $(".to-cart").on("click",function (){
         id = $(this).attr("product-id");

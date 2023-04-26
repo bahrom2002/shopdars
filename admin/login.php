@@ -10,8 +10,8 @@ if (isset($_SESSION['user']['username'])){
 
 }if (isset($_POST['login']) && $_POST['login'] != '' && isset($_POST['password']) && $_POST['password'] != ''){
     $login = $_POST['login'];
-    $password = $_POST['password'];
-    $login_sql = "SELECT * FROM user WHERE username = '$login' AND password = '$password'";
+    $password = md5(md5($_POST['password']));
+    $login_sql = "SELECT * FROM user WHERE username = '$login' AND password = '$password' AND type = 'admin'";
     $result = $conn->query($login_sql);
     $user = $result->fetch_assoc();
 
@@ -21,7 +21,7 @@ if (isset($_SESSION['user']['username'])){
 
         header('location: index.php');
     }else{
-        $error = 'login yoki parol xato kiritildi';
+        $error = 'Sizga bu joyga kirishga ruxsat berilmagan';
     }
 }
 ?>
@@ -29,6 +29,11 @@ if (isset($_SESSION['user']['username'])){
 <div class="container mt-5">
     <div class="row">
         <div class="offset-3 col-6">
+            <?php if (isset($error) && $error != ''):?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $error; ?>
+                </div>
+            <?php endif;?>
                 <form action="login.php" method="post">
                     <div class="form-group">
                         <label for="inputLogin">Login</label>

@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user']['username'])){
+    header('location: login.php');
+}
+
 require "sections/head.php";
 require "sections/header.php";
 

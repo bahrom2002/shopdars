@@ -1,3 +1,32 @@
+<?php
+require 'functions.php';
+
+if (!empty($_POST['username']) &&  isset($_POST['username']) && !empty($_POST['email']) &&
+    isset($_POST['email']) && !empty($_POST['password']) && isset($_POST['password']) &&
+    !empty($_POST['confirmPassword']) && isset($_POST['confirmPassword'])){
+
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    $error = '';
+    $success = '';
+    if ($password != $confirmPassword){
+        $error = 'Parollar mos kelmadi';
+    }else{
+       $result = signup($username, $email, $password);
+       if ($result === true){
+           $success = "Ro'yxatdan o'tdingiz";
+       }else{
+         $error = $result;
+       }
+
+    }
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="" class="h-100">
@@ -28,20 +57,20 @@
     <div class="container-fluid">
         <nav class="navbar-nav-wrap">
             <!-- White Logo -->
-            <a class="navbar-brand d-none d-lg-flex" href="./index.html" aria-label="Front">
+            <a class="navbar-brand d-none d-lg-flex" href="/" aria-label="Front">
                 <img class="navbar-brand-logo" src="./assets/svg/logos/logo-white.svg" alt="Logo">
             </a>
             <!-- End White Logo -->
 
             <!-- Default Logo -->
-            <a class="navbar-brand d-flex d-lg-none" href="./index.html" aria-label="Front">
+            <a class="navbar-brand d-flex d-lg-none" href="/" aria-label="Front">
                 <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo">
             </a>
             <!-- End Default Logo -->
 
             <div class="ms-auto">
-                <a class="link link-sm link-secondary" href="./index.html">
-                    <i class="bi-chevron-left small ms-1"></i> Go to main
+                <a class="link link-sm link-secondary" href="/">
+                    <i class="bi-chevron-left small ms-1"></i> Bosh sahifaga
                 </a>
             </div>
         </nav>
@@ -104,16 +133,35 @@
                 <div class="flex-grow-1 mx-auto" style="max-width: 28rem;">
                     <!-- Heading -->
                     <div class="text-center mb-5 mb-md-7">
-                        <h1 class="h2">Welcome to Front</h1>
-                        <p>Fill out the form to get started.</p>
+                        <h1 class="h2">Xush kelibsiz</h1>
+                        <p>Ro'yxatdan o'tish uchun qo'ydagilarni kiriting.</p>
+
+                        <?php if (isset($success) && $success != ''):?>
+                            <div class="alert alert-success" role="alert">
+                                <?= $success; ?>
+                            </div>
+                        <?php endif;?>
+
+                        <?php if (isset($error) && $error != ''):?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= $error; ?>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <!-- End Heading -->
 
                     <!-- Form -->
-                    <form class="js-validate needs-validation" novalidate>
+                    <form  action="signup.php" method="post" novalidate>
                         <!-- Form -->
                         <div class="mb-3">
-                            <label class="form-label" for="signupModalFormSignupEmail">Your email</label>
+                            <label class="form-label" for="signupModalFormSignupUsername">Login</label>
+                            <input type="text" class="form-control form-control-lg" name="username" id="signupModalFormSignupUsername" placeholder="login"  required>
+                            <span class="invalid-feedback">Please enter a valid email address.</span>
+                        </div>
+                        <!-- End Form -->
+                        <!-- Form -->
+                        <div class="mb-3">
+                            <label class="form-label" for="signupModalFormSignupEmail">Email</label>
                             <input type="email" class="form-control form-control-lg" name="email" id="signupModalFormSignupEmail" placeholder="email@site.com" aria-label="email@site.com" required>
                             <span class="invalid-feedback">Please enter a valid email address.</span>
                         </div>
@@ -121,10 +169,10 @@
 
                         <!-- Form -->
                         <div class="mb-3">
-                            <label class="form-label" for="signupModalFormSignupPassword">Password</label>
+                            <label class="form-label" for="signupModalFormSignupPassword">Parol</label>
 
                             <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                                <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupModalFormSignupPassword" placeholder="8+ characters required" aria-label="8+ characters required" required
+                                <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupModalFormSignupPassword" placeholder="Parol uzunligi 8+" aria-label="8+ characters required" required
                                        data-hs-toggle-password-options='{
                              "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                              "defaultClass": "bi-eye-slash",
@@ -142,10 +190,10 @@
 
                         <!-- Form -->
                         <div class="mb-3">
-                            <label class="form-label" for="signupModalFormSignupConfirmPassword">Confirm password</label>
+                            <label class="form-label" for="signupModalFormSignupConfirmPassword">Parol takroran</label>
 
                             <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                                <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupModalFormSignupConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required
+                                <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupModalFormSignupConfirmPassword" placeholder="Parol uzunligi 8+" aria-label="8+ characters required" required
                                        data-hs-validation-equal-field="#signupModalFormSignupPassword"
                                        data-hs-toggle-password-options='{
                            "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
@@ -162,20 +210,14 @@
                         </div>
                         <!-- End Form -->
 
-                        <!-- Check -->
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="signupHeroFormPrivacyCheck" name="signupFormPrivacyCheck" required>
-                            <label class="form-check-label small" for="signupHeroFormPrivacyCheck"> By submitting this form I have read and acknowledged the <a href=./page-privacy.html>Privacy Policy</a></label>
-                            <span class="invalid-feedback">Please accept our Privacy Policy.</span>
-                        </div>
-                        <!-- End Check -->
+
 
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Ro'yxatdan o'tish</button>
                         </div>
 
                         <div class="text-center">
-                            <p>Already have an account? <a class="link" href="./page-login.html">Log in here</a></p>
+                            <p>Accountingiz bormi? <a class="link" href="login.php">Kirish</a></p>
                         </div>
                     </form>
                     <!-- End Form -->
@@ -218,3 +260,4 @@
 </script>
 </body>
 </html>
+
