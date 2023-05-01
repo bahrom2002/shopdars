@@ -1,3 +1,14 @@
+<?php
+session_start();
+require 'functions.php';
+
+$orders = getOrders();
+
+$total = 0;
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en" dir="">
@@ -788,6 +799,7 @@
                         <!-- End Nav Scroller -->
 
                         <!-- Tab Content -->
+
                         <div class="tab-content" id="accountOrdersTabContent">
                             <div class="tab-pane fade show active" id="accountOrdersOne" role="tabpanel" aria-labelledby="accountOrdersOne-tab">
                                 <!-- Select Group -->
@@ -811,30 +823,39 @@
                                 <ul class="list-unstyled mb-5">
                                     <!-- Card -->
                                     <li class="card card-bordered shadow-none mb-3">
+
                                         <div class="card-body">
                                             <div class="row">
+
+
+                                                <?php foreach ($orders as $order): ?>
+                                                    <?php $total += $order['priceEach'] * $order['quantity']; ?>
+                                                <?php endforeach; ?>
                                                 <div class="col-6 col-md mb-3 mb-md-0">
                                                     <small class="card-subtitle mb-0">Total</small>
-                                                    <small class="text-dark fw-semi-bold">$999.00</small>
+                                                    <small class="text-dark fw-semi-bold">$<?= $total; ?></small>
                                                 </div>
+
                                                 <!-- End Col -->
 
                                                 <div class="col-6 col-md mb-3 mb-md-0">
-                                                    <small class="card-subtitle mb-0">Ship to</small>
-                                                    <small class="text-dark fw-semi-bold">Natalie Curtis</small>
+                                                    <small class="card-subtitle mb-0">Required date</small>
+                                                    <small class="text-dark fw-semi-bold"><?= isset($order['required_date']) ? $order['required_date'] : ''  ?></small>
+
                                                 </div>
                                                 <!-- End Col -->
 
                                                 <div class="col-6 col-md">
                                                     <small class="card-subtitle mb-0">Order no.</small>
-                                                    <small class="text-dark fw-semi-bold">456853648</small>
+                                                    <small class="text-dark fw-semi-bold"><?= isset($order['id']) ? $order['id'] : ''  ?></small>
                                                 </div>
                                                 <!-- End Col -->
 
                                                 <div class="col-6 col-md">
                                                     <small class="card-subtitle mb-0">Shipped date:</small>
-                                                    <small class="text-dark fw-semi-bold">30 April, 2020</small>
+                                                    <small class="text-dark fw-semi-bold"><?= isset($order['shipped_date']) ? $order['shipped_date'] : ''  ?></small>
                                                 </div>
+
                                                 <!-- End Col -->
                                             </div>
                                             <!-- End Row -->
@@ -845,189 +866,24 @@
                                                 <div class="col-md-8">
                                                     <h5>It's delivered!</h5>
 
-                                                    <div class="row gx-2">
-                                                        <div class="col">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img6.jpg" alt="Image Description">
-                                                        </div>
-                                                        <div class="col">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img4.jpg" alt="Image Description">
-                                                        </div>
-                                                        <div class="col">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img5.jpg" alt="Image Description">
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Row -->
-                                                </div>
 
-                                                <div class="col-md-4">
-                                                    <div class="d-grid gap-2">
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-basket small me-2"></i> View order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-truck small me-2"></i> Track order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-arrow-counterclockwise small me-2"></i> Return item
-                                                        </a>
-                                                        <a class="btn btn-primary btn-sm" href="#">Buy it again</a>
+                                                    <div class="row gx-4">
+                                                        <?php foreach ($orders as $order): ?>
+                                                        <div class="col-4">
+                                                            <img class="img-fluid" src="<?= isset($order['image']) ? $order['image'] : ''  ?>" alt="Image Description">
+                                                        </div>
+                                                        <?php endforeach; ?>
                                                     </div>
+
+                                                    <!-- End Row -->
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <!-- End Card -->
-
-                                    <!-- Card -->
-                                    <li class="card card-bordered shadow-none mb-3">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-6 col-md mb-3 mb-md-0">
-                                                    <small class="card-subtitle mb-0">Total</small>
-                                                    <small class="text-dark fw-semi-bold">$125.00</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md mb-3 mb-md-0">
-                                                    <small class="card-subtitle mb-0">Ship to</small>
-                                                    <small class="text-dark fw-semi-bold">Natalie Curtis</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md">
-                                                    <small class="card-subtitle mb-0">Order no.</small>
-                                                    <small class="text-dark fw-semi-bold">428766351</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md">
-                                                    <small class="card-subtitle mb-0">Shipped date:</small>
-                                                    <small class="text-dark fw-semi-bold">08 February, 2020</small>
-                                                </div>
-                                                <!-- End Col -->
-                                            </div>
-                                            <!-- End Row -->
-
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <h5>It's delivered!</h5>
-
-                                                    <div class="row gx-2">
-                                                        <div class="col-4">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img1.jpg" alt="Image Description">
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Row -->
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="d-grid gap-2">
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-basket small me-2"></i> View order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-truck small me-2"></i> Track order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-arrow-counterclockwise small me-2"></i> Return item
-                                                        </a>
-                                                        <a class="btn btn-primary btn-sm" href="#">Buy it again</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End List Item -->
-                                    </li>
-                                    <!-- End End Card -->
-
-                                    <!-- Card -->
-                                    <li class="card card-bordered shadow-none mb-3">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-6 col-md mb-3 mb-md-0">
-                                                    <small class="card-subtitle mb-0">Total</small>
-                                                    <small class="text-dark fw-semi-bold">$57.00</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md mb-3 mb-md-0">
-                                                    <small class="card-subtitle mb-0">Ship to</small>
-                                                    <small class="text-dark fw-semi-bold">Natalie Curtis</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md">
-                                                    <small class="card-subtitle mb-0">Order no.</small>
-                                                    <small class="text-dark fw-semi-bold">415338178</small>
-                                                </div>
-                                                <!-- End Col -->
-
-                                                <div class="col-6 col-md">
-                                                    <small class="card-subtitle mb-0">Shipped date:</small>
-                                                    <small class="text-dark fw-semi-bold">14 May, 2020</small>
-                                                </div>
-                                                <!-- End Col -->
-                                            </div>
-                                            <!-- End Row -->
-
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <h5>It's delivered!</h5>
-
-                                                    <div class="row gx-2">
-                                                        <div class="col-4">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img2.jpg" alt="Image Description">
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <img class="img-fluid" src="./assets/img/380x360/img7.jpg" alt="Image Description">
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Row -->
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="d-grid gap-2">
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-basket small me-2"></i> View order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-truck small me-2"></i> Track order
-                                                        </a>
-                                                        <a class="btn btn-white btn-sm" href="#">
-                                                            <i class="bi-arrow-counterclockwise small me-2"></i> Return item
-                                                        </a>
-                                                        <a class="btn btn-primary btn-sm" href="#">Buy it again</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End List Item -->
-                                    </li>
-                                    <!-- End End Card -->
                                 </ul>
 
                                 <!-- Pagination -->
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" aria-label="Previous">Prev</a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <!-- End Pagination -->
-                            </div>
+
 
                             <div class="tab-pane fade" id="accountOrdersTwo" role="tabpanel" aria-labelledby="accountOrdersTwo-tab">
                                 <!-- Empty State -->
@@ -1049,6 +905,7 @@
                                 <!-- End Empty State -->
                             </div>
                         </div>
+
                         <!-- End Tab Content -->
                     </div>
                     <!-- End Body -->

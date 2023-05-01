@@ -68,7 +68,9 @@
                         Cart<span class="badge badge-light" id="count-cart"><?= isset($_SESSION['cart']['count']) ? $_SESSION['cart']['count'] : ''?></span>
                         </a>
                         <!-- End Shopping Cart -->
-
+                        <?php if (!isset($_SESSION['user'])): ?>
+                        <a type="button" class="btn btn-primary" href="login.php">Login</a>
+                        <?php else: ?>
                         <ul class="badge badge-light">
                             <li class="nav-item dropdown">
                         <a class="btn btn-primary btn-transition" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : '' ?></a>
@@ -79,6 +81,8 @@
                         </ul>
                     </li>
                 </ul>
+                     <?php endif; ?>
+                </li>
 
             </div>
             <!-- End Collapse -->

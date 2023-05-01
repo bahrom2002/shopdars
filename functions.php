@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 include ('dbmysql.php');
 
@@ -194,4 +194,40 @@ function getPrice($id){
      $product = $result->fetch_assoc();
      return $product['price'];
 
+}
+
+
+function resetPassword($id, $password){
+    global $conn;
+    $inset_sql = "UPDATE user SET password = '$password' WHERE id = $id";
+    $conn->query($inset_sql);
+    if($conn->query($inset_sql)){
+        return true;
+    }else {
+        return false;
+    }
+}
+
+function getUser($id){
+    global $conn;
+    $sql = "SELECT * FROM user WHERE id = {$id}";
+    $users = $conn->query($sql);
+    return $users->fetch_assoc();
+}
+
+function getOrders(){
+    global $conn, $_SESSION;
+
+
+    $id = $_SESSION['user']['id'];
+
+$sql = "SELECT o.id, o.order_date, o.required_date, o.status, od.product_id, od.quantity, od.priceEach, p.image
+FROM orders as o
+LEFT JOIN order_detail as od ON o.id = od.order_id
+LEFT JOIN product as p ON od.product_id = p.id
+WHERE o.user_id = $id;
+";
+
+ $result = $conn->query($sql);
+ return $result->fetch_all(MYSQLI_ASSOC);
 }

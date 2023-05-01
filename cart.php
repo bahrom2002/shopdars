@@ -46,8 +46,7 @@ $total = 0;
                     <ul class="list-group list-group-flush list-group-no-gutters mb-5">
                        <?php foreach ($products as $product): ?>
                        <?php
-                       $total += $product['price'] * $product['count'];
-                       ?>
+                       $total += $product['price'] * $product['count']; ?>
                         <!-- Item -->
                         <li class="list-group-item">
                             <div class="d-flex">
@@ -109,7 +108,7 @@ $total = 0;
                                         <!-- End Col -->
 
                                         <div class="col-4 col-sm-2 d-none d-sm-inline-block text-right">
-                                            <span class="h5 d-block mb-1">$<?= isset($product['price']) ?$product['price'] : '' ?></span>
+                                            <span class="h5 d-block mb-1">$<?= isset($product['price']) ? $product['price'] : '' ?></span>
                                         </div>
                                         <!-- End Col -->
                                     </div>

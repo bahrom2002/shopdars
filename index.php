@@ -41,6 +41,7 @@ include ('functions.php');
                             <p class="small mb-0"><?= isset($buy_step['description']) ? $buy_step['description'] : '' ?></p>
                         </div>
                     </div>
+
                     <!-- End Icon Block -->
                 </div>
                 <!-- End Col -->
