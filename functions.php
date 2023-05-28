@@ -23,6 +23,7 @@ function getProduct(){
     return $products->fetch_all(MYSQLI_ASSOC);
 }
 
+
 function getCategoryName($id){
     global $conn;
     $sql = "SELECT name FROM category WHERE id = $id";
@@ -215,19 +216,52 @@ function getUser($id){
     return $users->fetch_assoc();
 }
 
-function getOrders(){
-    global $conn, $_SESSION;
 
+function getOrders($user_id){
+    global $conn;
+    $sql = "SELECT * FROM orders WHERE user_id = $user_id";
+    $orders = $conn->query($sql);
+    $orders = $orders->fetch_all(MYSQLI_ASSOC);
+    return $orders;
+}
 
-    $id = $_SESSION['user']['id'];
+function getOrderdetail($id){
+    global $conn;
+    $sql = "SELECT p.image as image, p.name as name, od.quantity as quantity, od.priceEach as price 
+                        FROM order_detail AS od
+        LEFT JOIN product AS p ON od.product_id = p.id 
+         WHERE od.order_id = $id ";
+    $order_details = $conn->query($sql);
+    $order_details = $order_details->fetch_all(MYSQLI_ASSOC);
+    return $order_details;
+}
 
-$sql = "SELECT o.id, o.order_date, o.required_date, o.status, od.product_id, od.quantity, od.priceEach, p.image
-FROM orders as o
-LEFT JOIN order_detail as od ON o.id = od.order_id
-LEFT JOIN product as p ON od.product_id = p.id
-WHERE o.user_id = $id;
-";
+function addFollower($email)
+{
+    global $conn;
 
- $result = $conn->query($sql);
- return $result->fetch_all(MYSQLI_ASSOC);
+    $sql = "INSERT INTO follower(email) VALUES ('$email')";
+    $conn->query($sql);
+}
+
+function updateUser($data){
+    global $conn;
+    $id = $data['id'];
+    $image_name = $data['image'];
+    $firstname = $data['firstname'];
+    $lastname = $data['lastname'];
+    $phone = $data['phone'];
+    $email = $data['email'];
+    $gender = $data['gender'];
+
+    if ($image_name != ''){
+        $user_sql = "UPDATE user SET image = '$image_name', firstname = '$firstname', lastname = '$lastname',
+                 phone = '$phone', email = '$email', gender = '$gender' WHERE id = {$id}";
+    }else{
+        $user_sql = "UPDATE user SET firstname = '$firstname', lastname = '$lastname',
+                 phone = '$phone', email = '$email', gender = '$gender' WHERE id = {$id}";
+    }
+    if ($conn->query($user_sql)){
+        return true;
+    }
 }

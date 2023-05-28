@@ -530,7 +530,7 @@ if (isset($_POST['newpassword']) && isset($_POST['oldpassword']) && isset($_SESS
                             </div>
                             <!-- End Authentication -->
 
-                            <a class="dropdown-item active" href="./account-overview.html">Personal Info</a>
+                            <a class="dropdown-item active" href="profile.php">Personal Info</a>
                             <a class="dropdown-item " href="./account-security.html">Security</a>
                             <a class="dropdown-item " href="./account-notifications.html">Notifications</a>
                             <a class="dropdown-item " href="./account-preferences.html">Preferences</a>
@@ -683,7 +683,7 @@ if (isset($_POST['newpassword']) && isset($_POST['oldpassword']) && isset($_SESS
                                 <!-- List -->
                                 <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="./account-overview.html">
+                                        <a class="nav-link active" href="profile.php">
                                             <i class="bi-person-badge nav-icon"></i> Personal info
                                         </a>
                                     </li>
@@ -731,15 +731,7 @@ if (isset($_POST['newpassword']) && isset($_POST['oldpassword']) && isset($_SESS
                                 <div class="d-lg-none">
                                     <div class="dropdown-divider"></div>
 
-                                    <!-- List -->
-                                    <ul class="nav nav-sm nav-tabs nav-vertical">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="bi-box-arrow-right nav-icon"></i> Log out
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!-- End List -->
+
                                 </div>
                                 <!-- End Nav -->
                             </div>
@@ -752,201 +744,7 @@ if (isset($_POST['newpassword']) && isset($_POST['oldpassword']) && isset($_SESS
             <!-- End Col -->
 
             <div class="col-lg-9">
-                <div class="d-grid gap-3 gap-lg-5">
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <h4 class="card-header-title">Basic info</h4>
-                        </div>
 
-                        <!-- Body -->
-                        <div class="card-body">
-                            <form>
-                                <!-- Form -->
-                                <div class="row mb-4">
-                                    <label class="col-sm-3 col-form-label form-label">Profile photo</label>
-
-                                    <div class="col-sm-9">
-                                        <!-- Media -->
-                                        <div class="d-flex align-items-center">
-                                            <!-- Avatar -->
-                                            <label class="avatar avatar-xl avatar-circle" for="avatarUploader">
-                                                <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img9.jpg" alt="Image Description">
-                                            </label>
-
-                                            <div class="d-grid d-sm-flex gap-2 ms-4">
-                                                <div class="form-attachment-btn btn btn-primary btn-sm">Upload photo
-                                                    <input type="file" class="js-file-attach form-attachment-btn-label" id="avatarUploader"
-                                                           data-hs-file-attach-options='{
-                                      "textTarget": "#avatarImg",
-                                      "mode": "image",
-                                      "targetAttr": "src",
-                                      "resetTarget": ".js-file-attach-reset-img",
-                                      "resetImg": "./assets/img/160x160/img1.jpg",
-                                      "allowTypes": [".png", ".jpeg", ".jpg"]
-                                   }'>
-                                                </div>
-                                                <!-- End Avatar -->
-
-                                                <button type="button" class="js-file-attach-reset-img btn btn-white btn-sm">Delete</button>
-                                            </div>
-                                        </div>
-                                        <!-- End Media -->
-                                    </div>
-                                </div>
-                                <!-- End Form -->
-
-                                <!-- Form -->
-                                <div class="row mb-4">
-                                    <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">Full name <i class="bi-question-circle text-body ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Displayed on public forums, such as Front."></i></label>
-
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="Natalie">
-                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="Curtis">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Form -->
-
-                                <!-- Form -->
-                                <div class="row mb-4">
-                                    <label for="emailLabel" class="col-sm-3 col-form-label form-label">Email</label>
-
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" name="email" id="emailLabel" placeholder="clarice@example.com" aria-label="clarice@example.com" value="natalie@example.com">
-                                    </div>
-                                </div>
-                                <!-- End Form -->
-
-                                <!-- Form -->
-                                <div class="js-add-field row mb-4"
-                                     data-hs-add-field-options='{
-                          "template": "#addPhoneFieldTemplate",
-                          "container": "#addPhoneFieldContainer",
-                          "defaultCreated": 0
-                        }'>
-                                    <label for="phoneLabel" class="col-sm-3 col-form-label form-label">Phone <span class="form-label-secondary">(Optional)</span></label>
-
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input type="text" class="js-input-mask form-control" name="phone" id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx" value="+1(605)5618929"
-                                                   data-hs-mask-options='{
-                                 "mask": "+{0}(000)000-00-00"
-                               }'>
-
-                                            <!-- Select -->
-                                            <div class="tom-select-custom">
-                                                <select class="js-select form-select" name="phoneSelect"
-                                                        data-hs-tom-select-options='{
-                                    "width": "8rem",
-                                    "hideSearch": true
-                                  }'>
-                                                    <option value="Mobile" selected>Mobile</option>
-                                                    <option value="Home">Home</option>
-                                                    <option value="Work">Work</option>
-                                                    <option value="Fax">Fax</option>
-                                                    <option value="Direct">Direct</option>
-                                                </select>
-                                            </div>
-                                            <!-- End Select -->
-                                        </div>
-
-                                        <!-- Container For Input Field -->
-                                        <div id="addPhoneFieldContainer"></div>
-
-                                        <a href="javascript:;" class="js-create-field form-link">
-                                            <i class="bi-plus-circle me-1"></i> Add phone
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- End Form -->
-
-                                <!-- Add Phone Input Field -->
-                                <div id="addPhoneFieldTemplate" style="display: none; position: relative;">
-                                    <div class="input-group input-group-add-field">
-                                        <input type="text" class="js-input-mask-dynamic form-control" data-name="additionlPhone" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
-                                               data-hs-mask-options='{
-                               "mask": "+{0}(000)000-00-00"
-                             }'>
-
-                                        <!-- Select -->
-                                        <div class="tom-select-custom">
-                                            <select class="js-select-dynamic form-select" data-name="additionlPhoneSelect"
-                                                    data-hs-tom-select-options='{
-                                    "width": "8rem",
-                                    "hideSearch": true
-                                  }'>
-                                                <option value="Mobile" selected>Mobile</option>
-                                                <option value="Home">Home</option>
-                                                <option value="Work">Work</option>
-                                                <option value="Fax">Fax</option>
-                                                <option value="Direct">Direct</option>
-                                            </select>
-                                        </div>
-                                        <!-- End Select -->
-                                    </div>
-
-                                    <a class="js-delete-field input-group-add-field-delete" href="javascript:;">
-                                        <i class="bi-x-lg"></i>
-                                    </a>
-                                </div>
-                                <!-- End Add Phone Input Field -->
-
-                                <!-- Form -->
-                                <div class="row mb-4">
-                                    <label class="col-sm-3 col-form-label form-label">Gender</label>
-
-                                    <div class="col-sm-9">
-                                        <div class="input-group input-group-md-down-break">
-                                            <!-- Radio Check -->
-                                            <label class="form-control" for="genderTypeRadio1">
-                          <span class="form-check">
-                            <input type="radio" class="form-check-input" name="genderTypeRadio" id="genderTypeRadio1">
-                            <span class="form-check-label">Male</span>
-                          </span>
-                                            </label>
-                                            <!-- End Radio Check -->
-
-                                            <!-- Radio Check -->
-                                            <label class="form-control" for="genderTypeRadio2">
-                          <span class="form-check">
-                            <input type="radio" class="form-check-input" name="genderTypeRadio" id="genderTypeRadio2" checked>
-                            <span class="form-check-label">Female</span>
-                          </span>
-                                            </label>
-                                            <!-- End Radio Check -->
-
-                                            <!-- Radio Check -->
-                                            <label class="form-control" for="genderTypeRadio3">
-                          <span class="form-check">
-                            <input type="radio" class="form-check-input" name="genderTypeRadio" id="genderTypeRadio3">
-                            <span class="form-check-label">Other</span>
-                          </span>
-                                            </label>
-                                            <!-- End Radio Check -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Form -->
-
-
-                        </div>
-                        <!-- Form -->
-                        <!-- End Form -->
-                        </form>
-                    </div>
-                    <!-- End Body -->
-
-                    <!-- Footer -->
-                    <div class="card-footer pt-0">
-                        <div class="d-flex justify-content-end gap-3">
-                            <a class="btn btn-white" href="javascript:;">Cancel</a>
-                            <a class="btn btn-primary" href="javascript:;">Save changes</a>
-                        </div>
-                    </div>
-                    <!-- End Footer -->
-                </div>
                 <!-- End Card -->
 
 
@@ -1016,26 +814,7 @@ if (isset($_POST['newpassword']) && isset($_POST['oldpassword']) && isset($_SESS
 
                 <!-- End Card -->
 
-                <!-- Card -->
-                <form action="logout.php" method="post">
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <h4 class="card-header-title">Accountni o'chirish</h4>
-                        </div>
 
-                        <!-- Body -->
-                        <div class="card-body">
-                            <p class="card-text">Rostan ham accountingizni o'chirmoqchimisiz.</p>
-
-
-                            <div class="d-flex justify-content-end">
-                                <a type="submit" href="logout.php" class="btn btn-danger">O'chirish</a>
-                            </div>
-                        </div>
-                        <!-- End Body -->
-                    </div>
-                </form>
-                <!-- End Card -->
             </div>
         </div>
         <!-- End Col -->

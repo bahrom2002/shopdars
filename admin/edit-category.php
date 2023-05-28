@@ -14,7 +14,7 @@
 <?php
 
 if (!isset($_SESSION['user']['username'])) {
-    header('location: login.php');
+    header('location: student.php');
 }
 
 if (isset($_GET['id'])){

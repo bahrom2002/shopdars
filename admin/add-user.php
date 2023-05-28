@@ -1,7 +1,7 @@
 <?php session_start();
 
 if (!isset($_SESSION['user']['username'])){
-    header('location: login.php');
+    header('location: student.php');
 }
 ?>
 
@@ -77,7 +77,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname'])
                 <label for="gender" class="form-label">gender</label>
                 <select class="form-control" name="gender">
                     <option value="1">erkak</option>
-                    <option value="0">ayol</option>
+                    <option value="2">ayol</option>
                 </select>
             </div>
             <div class="mb-3">

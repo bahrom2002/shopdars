@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user']['username'])){
-    header('location: login.php');
-}
 
 require "sections/head.php";
 require "sections/header.php";
@@ -305,14 +302,19 @@ include ('functions.php');
                     </div>
                     <!-- End Heading -->
 
-                    <form>
-                        <!-- Input Card -->
+                    <form method="post" action="index.php">
+                        <!-- Input Card --><?php
+                        if (isset($_POST["email"])){
+                            $email = $_POST["email"];
+                            addFollower($email);
+                        }
+                           ?>
                         <div class="input-card input-card-pill input-card-sm border mb-3">
                             <div class="input-card-form">
                                 <label for="subscribeForm" class="form-label visually-hidden">Enter email</label>
-                                <input type="text" class="form-control form-control-lg" id="subscribeForm" placeholder="Enter email" aria-label="Enter email">
+                                <input type="text" name="email" class="form-control form-control-lg" id="subscribeForm" placeholder="Enter email" aria-label="Enter email">
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg rounded-pill">Subscribe</button>
+                            <input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Subscribe"></input>
                         </div>
                         <!-- End Input Card -->
                     </form>

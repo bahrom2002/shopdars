@@ -1,6 +1,6 @@
 <?php session_start();
 if (!isset($_SESSION['user']['username'])){
-    header('location: login.php');
+    header('location: student.php');
 }
 ?>
 
@@ -34,7 +34,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_FILES['image']) && i
         'description' => $_POST['description'],
     ];
 
-
+editBuystep($data);
 
 }
 ?>

@@ -346,4 +346,29 @@ function Sign_up($data){
 
 }
 
+function addOrders1($id){
+    global $conn;
+    $updat = "UPDATE orders SET status = '1' WHERE id = {$id}";
+    if ($conn->query($updat)){
+        redirect('orders');
+    }
 
+}
+
+function addOrders2($id){
+    global $conn;
+
+    $updat = "UPDATE orders SET status = '2',shipped_date =  NOW()  WHERE id = {$id}";
+    if ($conn->query($updat)){
+        redirect('orders');
+    }
+
+}
+
+function getOrders($user_id){
+    global $conn;
+    $sql = "SELECT * FROM orders WHERE user_id = $user_id";
+    $orders = $conn->query($sql);
+    $orders = $orders->fetch_all(MYSQLI_ASSOC);
+    return $orders;
+}

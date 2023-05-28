@@ -1,6 +1,6 @@
 <?php session_start();
 if (!isset($_SESSION['user']['username']) AND !isset($_SESSION['user']['id'])){
-    header('Location: login.php');
+    header('Location: student.php');
 }
 ?>
 <?php require('sections/head.php'); ?>

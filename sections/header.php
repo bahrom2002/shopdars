@@ -41,12 +41,12 @@
                     <!-- End Dropdown -->
 
                     <li class="nav-item">
-                        <a class="nav-link " href="yourorder.php">Buyurtmalar</a>
+                        <a class="nav-link " href="orders.php">Buyurtmalar</a>
                     </li>
 
                     <!-- Pages -->
                     <li class="nav-item">
-                        <a class="nav-link" href="accaunt.php" >Profil</a>
+                        <a class="nav-link" href="profile.php" >Profil</a>
 
                         <!-- Mega Menu -->
                         <!-- End Mega Menu -->
@@ -73,13 +73,8 @@
                         <?php else: ?>
                         <ul class="badge badge-light">
                             <li class="nav-item dropdown">
-                        <a class="btn btn-primary btn-transition" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : '' ?></a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Kabinet</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="logout.php">Chiqish</a></li>
-                        </ul>
-                    </li>
+                        <a class="btn btn-primary btn-transition" id="navbarDropdown" href="profile.php" ><?= isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : '' ?></a>
+                            </li>
                 </ul>
                      <?php endif; ?>
                 </li>
